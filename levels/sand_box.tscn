@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://p6q51xwi2agp"]
+
+[ext_resource type="PackedScene" uid="uid://crhr55ln80al5" path="res://characters/player/player.tscn" id="1_8f3bn"]
+[ext_resource type="Texture2D" uid="uid://dwq38jngbrmti" path="res://icon.svg" id="1_bn0c6"]
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_j3m32"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_862d6"]
+albedo_texture = ExtResource("1_bn0c6")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_j3m32"]
+size = Vector2(1, 1)
+
+[node name="SandBox" type="Node3D" unique_id=934069579]
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1626534351]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1465987641]
+shape = SubResource("HeightMapShape3D_j3m32")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=308794179]
+material_override = SubResource("StandardMaterial3D_862d6")
+mesh = SubResource("PlaneMesh_j3m32")
+
+[node name="Player" parent="." unique_id=1134144444 instance=ExtResource("1_8f3bn")]

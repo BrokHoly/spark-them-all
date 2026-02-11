@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://crhr55ln80al5" path="res://characters/player/player.tscn" id="1_8f3bn"]
 [ext_resource type="Texture2D" uid="uid://dwq38jngbrmti" path="res://icon.svg" id="1_bn0c6"]
+[ext_resource type="PackedScene" uid="uid://c6njyhv7wet0k" path="res://levels/props/proto_ramp.tscn" id="3_862d6"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_j3m32"]
 
@@ -14,7 +15,7 @@ size = Vector2(1, 1)
 [node name="SandBox" type="Node3D" unique_id=934069579]
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=1626534351]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1465987641]
 shape = SubResource("HeightMapShape3D_j3m32")
@@ -24,3 +25,9 @@ material_override = SubResource("StandardMaterial3D_862d6")
 mesh = SubResource("PlaneMesh_j3m32")
 
 [node name="Player" parent="." unique_id=1134144444 instance=ExtResource("1_8f3bn")]
+
+[node name="ProtoRamp" parent="." unique_id=239166772 instance=ExtResource("3_862d6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.337, 0.5, -2.681)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=361703537]
+transform = Transform3D(0.9766723, -0.18596625, 0.10736766, 0, 0.49999997, 0.86602545, -0.21473533, -0.84582305, 0.48833612, 0, 2.4428096, 0)

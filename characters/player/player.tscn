@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://crhr55ln80al5"]
 
 [ext_resource type="Script" uid="uid://b6uphe0e54xxk" path="res://characters/player/player.gd" id="1_508ok"]
+[ext_resource type="PackedScene" uid="uid://ig34dw7euucc" path="res://levels/props/lamp.tscn" id="2_exd8k"]
 [ext_resource type="PackedScene" uid="uid://donx8metrmqdc" path="res://ui/pause_menu.tscn" id="2_xxgcw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b886q"]
@@ -19,19 +20,29 @@ shape = SubResource("CapsuleShape3D_b886q")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BodyCollisionShape" unique_id=875680744]
 mesh = SubResource("CapsuleMesh_508ok")
 
-[node name="FPSAnchor" type="Node3D" parent="." unique_id=1330128308]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+[node name="LampAnchor" type="Node3D" parent="." unique_id=1537967966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1634474, 0)
 
-[node name="Camera3D" type="Camera3D" parent="FPSAnchor" unique_id=322568914]
+[node name="AimArea" type="Area3D" parent="LampAnchor" unique_id=426969501]
 
-[node name="AimArea" type="Area3D" parent="FPSAnchor" unique_id=426969501]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FPSAnchor/AimArea" unique_id=26414591]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LampAnchor/AimArea" unique_id=26414591]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1)
 shape = SubResource("CylinderShape3D_xxgcw")
 debug_color = Color(0.6344296, 0.52752626, 0.044364735, 0.41960785)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="FPSAnchor" unique_id=917961053]
+[node name="SpotLight3D" type="SpotLight3D" parent="LampAnchor" unique_id=917961053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5355877)
+light_color = Color(0.84529376, 0.8447014, 7.70092e-07, 1)
+spot_attenuation = 0.0
+spot_angle_attenuation = 1.2394011e-05
+
+[node name="Lamp" parent="LampAnchor" unique_id=930500765 instance=ExtResource("2_exd8k")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.3578018)
+
+[node name="FPSAnchor" type="Node3D" parent="." unique_id=1330128308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="Camera3D" type="Camera3D" parent="FPSAnchor" unique_id=322568914]
 
 [node name="Head" type="Node3D" parent="FPSAnchor" unique_id=1367427803]
 

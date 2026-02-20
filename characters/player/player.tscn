@@ -53,6 +53,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 [node name="TPSAnchor" type="Node3D" parent="FPSAnchor" unique_id=1022000529]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.86653614, 3.4722185)
 
+[node name="RayCast3D" type="RayCast3D" parent="FPSAnchor" unique_id=1194322530]
+target_position = Vector3(0, 0, -3)
+
 [node name="HUD" type="Control" parent="." unique_id=1314687766]
 visible = false
 layout_mode = 3

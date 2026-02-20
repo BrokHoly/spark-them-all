@@ -48,6 +48,12 @@ pause={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="environement"
+3d_physics/layer_2="collectible"
+3d_physics/layer_3="entity"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

@@ -1,11 +1,22 @@
 [gd_scene format=3 uid="uid://btxhphovqdvtt"]
 
+[ext_resource type="Shader" uid="uid://dgshhjest7bm6" path="res://collectibles/loots/boular_grape.gdshader" id="2_1lxjm"]
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_xqjb4"]
+radius = 0.2
 
 [sub_resource type="SphereMesh" id="SphereMesh_kvv3t"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rjpse"]
+render_priority = 0
+shader = ExtResource("2_1lxjm")
+shader_parameter/albedo = Color(1, 0.5, 0.3, 1)
 
 [node name="BoularGrape" type="RigidBody3D" unique_id=1156317511]
-transform = Transform3D(0.455, 0, 0, 0, 0.455, 0, 0, 0, 0.455, 0, 0, 0)
+collision_layer = 2
+collision_mask = 3
 mass = 0.428
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1420400019]
@@ -13,3 +24,4 @@ shape = SubResource("SphereShape3D_xqjb4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=510632318]
 mesh = SubResource("SphereMesh_kvv3t")
+surface_material_override/0 = SubResource("ShaderMaterial_rjpse")

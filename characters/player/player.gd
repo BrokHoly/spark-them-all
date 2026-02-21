@@ -3,26 +3,29 @@ extends CharacterBody3D
 # Relative to player control
 const SPEED = 5.0
 const SPRINT_MULTIPLIER = 1.5
+const WALK_MULTIPLIER = 0.8
 const JUMP_VELOCITY = 4.5
 const LOOK_SENSITIVITY = 0.002
 const JOYSTICK_SENSITIVITY = 3.0
 const JOYSTICK_DEADZONE = 0.15
 const BASE_FOV = 75.0
 const SPRINT_FOV = 85.0
+const FOCUS_FOV = 70.0
 
 var boular_grapes = 0;
 
 var isFPS: bool = true
 
 # Relative to the lamp
-const LAMP_IDLE_ANGLE = 45
-const LAMP_IDLE_RANGE = 5
-const LAMP_FOCUS_ANGLE = 30
-const LAMP_FOCUS_RANGE = 10
+const LAMP_IDLE_ANGLE = 45.0
+const LAMP_IDLE_RANGE = 5.0
+const LAMP_FOCUS_ANGLE = 20.0
+const LAMP_FOCUS_RANGE = 15.0
 
 @onready var fps_anchor: Node3D = $FPSAnchor
 @onready var camera: Camera3D = $FPSAnchor/Camera3D
-@onready var lamp: Node3D = $LampAnchor
+@onready var lamp_anchor: Node3D = $LampAnchor
+@onready var lamp_spotlight: SpotLight3D = $LampAnchor/SpotLight3D
 @onready var collectible_area: Area3D = $CollectibleRange
 
 
@@ -46,10 +49,19 @@ func _physics_process(delta: float) -> void:
 	#Sprint
 	var speed_multiplier = 1.0
 	var fov = BASE_FOV
-	if(Input.is_action_pressed("sprint")):
+	var lamp_angle = LAMP_IDLE_ANGLE
+	var lamp_range = LAMP_IDLE_RANGE
+	if(Input.is_action_pressed("focus")):
+		speed_multiplier = WALK_MULTIPLIER
+		fov = FOCUS_FOV
+		lamp_angle = LAMP_FOCUS_ANGLE
+		lamp_range = LAMP_FOCUS_RANGE
+	elif (Input.is_action_pressed("sprint")):
 		speed_multiplier = SPRINT_MULTIPLIER
 		fov = SPRINT_FOV
 	camera.fov = lerp(camera.fov, fov, 8.0 * delta)
+	lamp_spotlight.spot_angle = lerp(lamp_spotlight.spot_angle, lamp_angle, 8.0 * delta)
+	lamp_spotlight.spot_range = lerp(lamp_spotlight.spot_range, lamp_range, 8.0 * delta)
 	
 	if direction:
 		velocity.x = direction.x * SPEED * speed_multiplier
@@ -95,7 +107,7 @@ func handle_joystick_look(delta: float) -> void:
 # 🔦 Shared lamp logic (so we don't duplicate code)
 func update_lamp_rotation() -> void:
 	var target_lamp_x = clamp(fps_anchor.rotation.x, -PI/4, PI/4)
-	lamp.rotation.x = lerp(lamp.rotation.x, target_lamp_x, 0.15)
+	lamp_anchor.rotation.x = lerp(lamp_anchor.rotation.x, target_lamp_x, 0.15)
 
 
 func _on_collectible_entered(body: Node3D):

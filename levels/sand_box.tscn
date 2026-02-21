@@ -27,7 +27,6 @@ material_override = SubResource("StandardMaterial3D_862d6")
 mesh = SubResource("PlaneMesh_j3m32")
 
 [node name="Player" parent="." unique_id=1134144444 instance=ExtResource("1_8f3bn")]
-collision_layer = 4
 
 [node name="ProtoRamp" parent="." unique_id=239166772 instance=ExtResource("3_862d6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.337, 0.5, -2.681)

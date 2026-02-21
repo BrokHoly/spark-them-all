@@ -10,6 +10,8 @@ const JOYSTICK_DEADZONE = 0.15
 const BASE_FOV = 75.0
 const SPRINT_FOV = 85.0
 
+var boular_grapes = 0;
+
 var isFPS: bool = true
 
 # Relative to the lamp
@@ -21,10 +23,12 @@ const LAMP_FOCUS_RANGE = 10
 @onready var fps_anchor: Node3D = $FPSAnchor
 @onready var camera: Camera3D = $FPSAnchor/Camera3D
 @onready var lamp: Node3D = $LampAnchor
+@onready var collectible_area: Area3D = $CollectibleRange
 
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	collectible_area.body_entered.connect(_on_collectible_entered)
 
 func _physics_process(delta: float) -> void:
 	# Add gravity
@@ -39,13 +43,14 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
+	#Sprint
 	var speed_multiplier = 1.0
 	var fov = BASE_FOV
 	if(Input.is_action_pressed("sprint")):
 		speed_multiplier = SPRINT_MULTIPLIER
 		fov = SPRINT_FOV
-		
 	camera.fov = lerp(camera.fov, fov, 8.0 * delta)
+	
 	if direction:
 		velocity.x = direction.x * SPEED * speed_multiplier
 		velocity.z = direction.z * SPEED * speed_multiplier
@@ -91,3 +96,15 @@ func handle_joystick_look(delta: float) -> void:
 func update_lamp_rotation() -> void:
 	var target_lamp_x = clamp(fps_anchor.rotation.x, -PI/4, PI/4)
 	lamp.rotation.x = lerp(lamp.rotation.x, target_lamp_x, 0.15)
+
+
+func _on_collectible_entered(body: Node3D):
+	if(body.is_in_group("collectible")):
+		collect_item(body)
+	
+	
+	
+func collect_item(body: Node3D):
+	boular_grapes += 1
+	print("COLLECT ALLÉ : ", boular_grapes)
+	body.queue_free()

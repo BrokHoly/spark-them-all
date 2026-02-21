@@ -13,6 +13,8 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_exd8k"]
 
 [node name="Player" type="CharacterBody3D" unique_id=1134144444]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_508ok")
 
 [node name="BodyCollisionShape" type="CollisionShape3D" parent="." unique_id=2122099971]
@@ -26,6 +28,8 @@ mesh = SubResource("CapsuleMesh_508ok")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1634474, 0)
 
 [node name="AimArea" type="Area3D" parent="LampAnchor" unique_id=426969501]
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LampAnchor/AimArea" unique_id=26414591]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1)
@@ -68,6 +72,8 @@ layout_mode = 1
 
 [node name="CollectibleRange" type="Area3D" parent="." unique_id=1269460920]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollectibleRange" unique_id=559345352]
 transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, 0)

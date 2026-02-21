@@ -14,9 +14,8 @@ render_priority = 0
 shader = ExtResource("2_1lxjm")
 shader_parameter/albedo = Color(1, 0.5, 0.3, 1)
 
-[node name="BoularGrape" type="RigidBody3D" unique_id=1156317511]
+[node name="BoularGrape" type="RigidBody3D" unique_id=1156317511 groups=["collectible"]]
 collision_layer = 2
-collision_mask = 3
 mass = 0.428
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1420400019]

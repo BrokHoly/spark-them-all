@@ -62,6 +62,7 @@ shape = SubResource("CylinderShape3D_5dc8e")
 debug_color = Color(0.572453, 0.55207324, 0.17323065, 0.41960785)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LampAnchor/AimArea/CylinderShape" unique_id=88374238]
+visible = false
 material_override = SubResource("StandardMaterial3D_5dc8e")
 transparency = 0.75
 mesh = SubResource("CylinderMesh_ixbpm")

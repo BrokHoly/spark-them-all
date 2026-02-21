@@ -1,11 +1,16 @@
 extends CharacterBody3D
 
-const SPEED = 5.0
+signal killed
+
+const SPEED = 3.0
 var HEALTH = 10
 
 var time_since_last_hit = 0.0
 
 @export var player: Node3D   # Assign player in inspector or dynamically
+
+func _ready() -> void:
+	killed.connect(player.on_ennemy_killed)
 
 func _physics_process(delta: float) -> void:
 	# Gravity
@@ -34,4 +39,5 @@ func expose_to_light(delta: float, damage_per_tick: int, damage_cooldown: float)
 		time_since_last_hit = 0.0  # reset cooldown
 		print("Boular hit! Health:", HEALTH)
 		if HEALTH <= 0:
+			emit_signal("killed")
 			queue_free()

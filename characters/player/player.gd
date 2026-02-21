@@ -19,6 +19,7 @@ var lamp_damage_cooldown = 0.5   # seconds between hits
 var lamp_damage_per_tick = 1
 
 var boular_grapes = 0
+var kill_score = 0
 
 var isFPS: bool = true
 
@@ -41,6 +42,7 @@ const LAMP_FOCUS_RADIUS = 1.0
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	collectible_area.body_entered.connect(_on_collectible_entered)
+	
 
 func _physics_process(delta: float) -> void:
 	# Add gravity
@@ -143,7 +145,6 @@ func _is_in_lamp_cone(body: Node3D) -> bool:
 	var threshold = cos(deg_to_rad(lamp_spotlight.spot_angle * 0.5))
 	return dot > threshold
 	
-	
 # 🔹 Handle lamp exposure for Boulars
 func _handle_lamp_burn(delta: float) -> void:
 	# Loop through overlapping bodies in AimArea
@@ -153,7 +154,6 @@ func _handle_lamp_burn(delta: float) -> void:
 				# Each Boular should implement expose_to_light(delta)
 				body.expose_to_light(delta, lamp_damage_per_tick, lamp_damage_cooldown)
 				#print("IN IT ????", Time.get_unix_time_from_system())
-				
 
 # Collectible system (unchanged)
 func _on_collectible_entered(body: Node3D):
@@ -164,3 +164,7 @@ func collect_item(body: Node3D):
 	boular_grapes += 1
 	print("COLLECT ALLÉ : ", boular_grapes)
 	body.queue_free()
+
+func on_ennemy_killed():
+	kill_score += 1
+	print("kill score : ", kill_score)

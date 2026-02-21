@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dwq38jngbrmti" path="res://icon.svg" id="1_bn0c6"]
 [ext_resource type="PackedScene" uid="uid://c6njyhv7wet0k" path="res://levels/props/proto_ramp.tscn" id="3_862d6"]
 [ext_resource type="PackedScene" uid="uid://btxhphovqdvtt" path="res://collectibles/loots/boular_grape.tscn" id="4_bheoy"]
+[ext_resource type="PackedScene" uid="uid://bx4penw8dnaux" path="res://characters/enemies/boular/boular.tscn" id="5_aymlm"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_j3m32"]
 
@@ -36,3 +37,6 @@ transform = Transform3D(0.9766723, -0.18596625, 0.10736766, 0, 0.49999997, 0.866
 
 [node name="BoularGrape" parent="." unique_id=1156317511 instance=ExtResource("4_bheoy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2272719, 0.49678457, -2.3667464)
+
+[node name="Boular" parent="." unique_id=1503704684 instance=ExtResource("5_aymlm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13138151, -7.0094976)

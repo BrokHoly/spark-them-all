@@ -39,7 +39,7 @@ const LAMP_FOCUS_RADIUS = 1.0
 @onready var aim_area: Area3D = $LampAnchor/AimArea
 @onready var cylinder_shape: CylinderShape3D = $LampAnchor/AimArea/CylinderShape.shape
 @onready var raycast: RayCast3D = $FPSAnchor/RayCast3D
-@onready var interaction_label: Label = $Hud/CenterContainer/InteractLabel
+@onready var interaction_label: Label = $Hud/BaseHUD/InteractLabel
 
 
 func _ready() -> void:
@@ -99,10 +99,6 @@ func _physics_process(delta: float) -> void:
 	_handle_lamp_burn(delta)
 	
 	_handle_interaction()
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
-		get_tree().quit()
 
 # Mouse look
 func _unhandled_input(event: InputEvent) -> void:

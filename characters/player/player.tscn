@@ -4,6 +4,7 @@
 [ext_resource type="CylinderMesh" uid="uid://don12f7grk5tq" path="res://models/spotlight_mesh.tres" id="2_5dc8e"]
 [ext_resource type="PackedScene" uid="uid://ig34dw7euucc" path="res://models/props/lamp.tscn" id="2_exd8k"]
 [ext_resource type="PackedScene" uid="uid://c1bfprpwewvo2" path="res://ui/hud.tscn" id="4_5dc8e"]
+[ext_resource type="PackedScene" uid="uid://bidyeh2ffpqjh" path="res://docs/dev_controls.tscn" id="5_ixbpm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b886q"]
 
@@ -96,3 +97,7 @@ transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, 0)
 shape = SubResource("SphereShape3D_exd8k")
 
 [node name="Hud" parent="." unique_id=2086982386 instance=ExtResource("4_5dc8e")]
+
+[node name="DevControls" parent="." unique_id=1168557151 instance=ExtResource("5_ixbpm")]
+
+[connection signal="dev_quit" from="Hud" to="DevControls" method="_on_hud_dev_quit"]

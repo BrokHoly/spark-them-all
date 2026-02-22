@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://baxchawcmx2an"]
 
+[ext_resource type="Script" uid="uid://b85ln3yd013nx" path="res://interactables/button/button.gd" id="1_oqdat"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_2324a"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_2324a"]
@@ -8,6 +10,7 @@
 albedo_color = Color(0.08627451, 1, 0.12156863, 1)
 
 [node name="Button" type="StaticBody3D" unique_id=1765601522 groups=["interactable"]]
+script = ExtResource("1_oqdat")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1485800131]
 shape = SubResource("BoxShape3D_2324a")

@@ -29,7 +29,7 @@ grow_vertical = 2
 texture = ExtResource("1_276te")
 stretch_mode = 3
 
-[node name="InteractLabel" type="Label" parent="BaseHUD" unique_id=1820389047]
+[node name="HelpText" type="Label" parent="BaseHUD" unique_id=1820389047]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5

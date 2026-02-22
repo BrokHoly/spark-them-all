@@ -32,16 +32,21 @@ mesh = SubResource("PlaneMesh_j3m32")
 
 [node name="ProtoRamp" parent="." unique_id=239166772 instance=ExtResource("3_862d6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.337, 0.5, -2.681)
+visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=361703537]
 transform = Transform3D(0.9766723, -0.18596625, 0.10736766, 0, 0.49999997, 0.86602545, -0.21473533, -0.84582305, 0.48833612, 0, 2.4428096, 0)
 
 [node name="BoularGrape" parent="." unique_id=1156317511 instance=ExtResource("4_bheoy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2272719, 0.49678457, -2.3667464)
+visible = false
 
 [node name="Boular" parent="." unique_id=1503704684 node_paths=PackedStringArray("player") instance=ExtResource("5_aymlm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13138151, -7.0094976)
+visible = false
 player = NodePath("../Player")
 
 [node name="Button" parent="." unique_id=1765601522 instance=ExtResource("6_bwjjf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.855623, 1.6423469, -4.953174)
+toggle_mode = false
+auto_reset_time = 0.1

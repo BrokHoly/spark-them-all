@@ -1,7 +1,5 @@
 extends CharacterBody3D
 
-signal ray_collied
-
 # Relative to player control
 const SPEED = 5.0
 const SPRINT_MULTIPLIER = 1.5

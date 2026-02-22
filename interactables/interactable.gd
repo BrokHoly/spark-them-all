@@ -15,12 +15,28 @@ enum TriggerMode {
 var INTERACTION_TEXT : String = "Press [F]/(X)/(□) to interact"
 @export var enable: bool = true
 @export var repeat_rate : float = 0.2
+@export var auto_reset_time: float = 0.0  # 0 = no auto reset
 
+var reset_timer: float = 0.0
 var repeat_timer : float = 0.0
 
 var is_pressed := false
 var is_being_pressed := false
 var is_hovered := false
+
+
+func _process(delta: float):
+	# Auto-reset non-toggle buttons
+	if auto_reset_time > 0.0 and not toggle_mode and is_pressed:
+		reset_timer -= delta
+		if reset_timer <= 0.0:
+			reactivate()
+
+func reactivate():
+	# Reset button state to allow clicking again
+	is_pressed = false
+	is_being_pressed = false
+	_update_visual()
 
 	
 func handle_input(player, pressed: bool, delta: float):
@@ -51,7 +67,8 @@ func _activate():
 		is_pressed = !is_pressed
 	else:
 		is_pressed = true
-	
+		if auto_reset_time > 0.0:
+			reset_timer = auto_reset_time  # start countdown
 	_trigger_targets()
 	emit_signal("activated", is_pressed)
 	_update_visual()

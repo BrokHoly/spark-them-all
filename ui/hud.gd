@@ -13,7 +13,6 @@ var is_stat = false
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	pause_menu.visible = get_tree().paused
-	self.connect("ray_interact", show_help_text)
 	
 
 func toggle_pause():

@@ -1,7 +1,5 @@
 extends Interactable
 
-@export var target_node: Affected   # Something to affect in the world. Nothing for now
-
 @onready var mesh: MeshInstance3D = $CollisionShape3D/MeshInstance3D
 var material
 
@@ -17,7 +15,7 @@ func interact(player):
 	else:
 		is_pressed = true
 	_update_visual()
-	_trigger_target()
+	_trigger_targets()
 
 func _update_visual():
 	if not enable:
@@ -30,7 +28,3 @@ func _update_visual():
 		material.albedo_color = Color.YELLOW
 	else:
 		material.albedo_color = Color.GREEN
-
-func _trigger_target():
-	if target_node:
-		target_node.affect(is_pressed)

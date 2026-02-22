@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://c1bfprpwewvo2"]
+
+[ext_resource type="Texture2D" uid="uid://b8i2bagxgn2ud" path="res://ui/crossair.png" id="1_276te"]
+[ext_resource type="Script" uid="uid://cnj5igkh2nxko" path="res://ui/hud.gd" id="1_546lt"]
+[ext_resource type="PackedScene" uid="uid://donx8metrmqdc" path="res://ui/pause_menu.tscn" id="1_rbyyf"]
+[ext_resource type="Texture2D" uid="uid://batxwjr6nk183" path="res://ui/void_grape_icon_32.png" id="3_en2x2"]
+[ext_resource type="Texture2D" uid="uid://dfj0lbipg3s3y" path="res://ui/skull_icon_32.png" id="4_1v5rv"]
+[ext_resource type="PackedScene" uid="uid://bydmpphs3feae" path="res://ui/stat_menu.tscn" id="6_1v5rv"]
+
+[node name="Hud" type="CanvasLayer" unique_id=1801688554]
+script = ExtResource("1_546lt")
+
+[node name="BaseHUD" type="Control" parent="." unique_id=1207388609]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 1
+
+[node name="Crosshair" type="TextureRect" parent="BaseHUD" unique_id=1145820200]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_276te")
+stretch_mode = 3
+
+[node name="InteractLabel" type="Label" parent="BaseHUD" unique_id=1820389047]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+
+[node name="Metrics" type="Control" parent="BaseHUD" unique_id=1145180717]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopLeft" type="VBoxContainer" parent="BaseHUD/Metrics" unique_id=1399460837]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.01
+anchor_right = 0.5
+anchor_bottom = 0.1
+
+[node name="GrapeScore" type="HBoxContainer" parent="BaseHUD/Metrics/TopLeft" unique_id=1364150819]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="BaseHUD/Metrics/TopLeft/GrapeScore" unique_id=806976976]
+layout_mode = 2
+texture = ExtResource("3_en2x2")
+
+[node name="Text" type="Label" parent="BaseHUD/Metrics/TopLeft/GrapeScore" unique_id=2084507890]
+layout_mode = 2
+text = "3"
+
+[node name="EnemyRemaining" type="HBoxContainer" parent="BaseHUD/Metrics/TopLeft" unique_id=364229982]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="BaseHUD/Metrics/TopLeft/EnemyRemaining" unique_id=1056494828]
+layout_mode = 2
+texture = ExtResource("4_1v5rv")
+
+[node name="Text" type="Label" parent="BaseHUD/Metrics/TopLeft/EnemyRemaining" unique_id=1639823905]
+layout_mode = 2
+text = "1/20"
+
+[node name="TopRight" type="VBoxContainer" parent="BaseHUD/Metrics" unique_id=648388110]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="OverlayLayer" type="Control" parent="." unique_id=246150603]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="PauseMenu" parent="OverlayLayer" unique_id=1942109131 instance=ExtResource("1_rbyyf")]
+visible = false
+layout_mode = 1
+offset_left = 0.0
+offset_right = 0.0
+
+[node name="StatMenu" parent="OverlayLayer" unique_id=1465823771 instance=ExtResource("6_1v5rv")]
+visible = false
+layout_mode = 0
+
+[connection signal="quit_pressed" from="OverlayLayer/PauseMenu" to="." method="_on_pause_menu_quit_pressed"]
+[connection signal="resume_pressed" from="OverlayLayer/PauseMenu" to="." method="_on_pause_menu_resume_pressed"]

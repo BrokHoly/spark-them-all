@@ -1,31 +1,59 @@
 [gd_scene format=3 uid="uid://donx8metrmqdc"]
 
-[node name="PauseMenu" type="Control" unique_id=1942109131]
+[ext_resource type="Script" uid="uid://myypk2nsqjan" path="res://ui/pause_menu.gd" id="2_ejwgg"]
+
+[node name="PauseMenu" type="Control" unique_id=1207442489]
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ejwgg")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2065488531]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1254902, 0.03137255, 0.24313726, 0.60784316)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=470222515]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1536244577]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1431912659]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1927178092]
 layout_mode = 2
 
-[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer" unique_id=201423398]
+[node name="PauseLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=928798759]
 layout_mode = 2
+text = "Pause Menu"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=201423398]
+layout_mode = 2
+action_mode = 0
 text = "Resume"
 
-[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer" unique_id=604461627]
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=604461627]
 layout_mode = 2
 text = "Settings
 "
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=944650443]
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=944650443]
 layout_mode = 2
 text = "Quit
 "
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

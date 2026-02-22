@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c6njyhv7wet0k" path="res://models/props/proto_ramp.tscn" id="3_862d6"]
 [ext_resource type="PackedScene" uid="uid://btxhphovqdvtt" path="res://collectibles/loots/boular_grape.tscn" id="4_bheoy"]
 [ext_resource type="PackedScene" uid="uid://bx4penw8dnaux" path="res://characters/enemies/boular/boular.tscn" id="5_aymlm"]
+[ext_resource type="PackedScene" uid="uid://baxchawcmx2an" path="res://interactables/button/button.tscn" id="6_bwjjf"]
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_j3m32"]
 
@@ -41,3 +42,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2272719, 0.49678457, -2.366
 [node name="Boular" parent="." unique_id=1503704684 node_paths=PackedStringArray("player") instance=ExtResource("5_aymlm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13138151, -7.0094976)
 player = NodePath("../Player")
+
+[node name="Button" parent="." unique_id=1765601522 instance=ExtResource("6_bwjjf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.855623, 1.6423469, -4.953174)

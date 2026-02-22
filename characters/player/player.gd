@@ -38,6 +38,9 @@ const LAMP_FOCUS_RADIUS = 1.0
 @onready var collectible_area: Area3D = $CollectibleRange
 @onready var aim_area: Area3D = $LampAnchor/AimArea
 @onready var cylinder_shape: CylinderShape3D = $LampAnchor/AimArea/CylinderShape.shape
+@onready var raycast: RayCast3D = $FPSAnchor/RayCast3D
+@onready var interaction_label: Label = $Hud/BaseHUD/InteractLabel
+
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -94,10 +97,8 @@ func _physics_process(delta: float) -> void:
 
 	# Handle lamp burn on Boulars
 	_handle_lamp_burn(delta)
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
-		get_tree().quit()
+	
+	_handle_interaction()
 
 # Mouse look
 func _unhandled_input(event: InputEvent) -> void:
@@ -168,3 +169,28 @@ func collect_item(body: Node3D):
 func on_ennemy_killed():
 	kill_score += 1
 	print("kill score : ", kill_score)
+	
+	
+func _handle_interaction():
+	if not raycast.is_colliding():
+		_hide_interaction_text()
+		return
+	
+	var collider = raycast.get_collider()
+	
+	if collider and collider.is_in_group("interactable"):
+		_show_interaction_text("Press [F] to interact (or X on Xbox, or SQUARE on PS)")
+
+		if Input.is_action_just_pressed("interact"):
+			if collider.has_method("interact"):
+				collider.interact(self)
+	else:
+		_hide_interaction_text()
+		
+
+func _show_interaction_text(text: String):
+	interaction_label.text = text
+	interaction_label.visible = true
+
+func _hide_interaction_text():
+	interaction_label.visible = false

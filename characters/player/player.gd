@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal ray_collied
+
 # Relative to player control
 const SPEED = 5.0
 const SPRINT_MULTIPLIER = 1.5
@@ -23,6 +25,8 @@ var kill_score = 0
 
 var isFPS: bool = true
 
+var current_hovered: Interactable = null
+
 # Relative to the lamp
 const LAMP_IDLE_ANGLE = 45.0
 const LAMP_IDLE_RANGE = 5.0
@@ -39,7 +43,7 @@ const LAMP_FOCUS_RADIUS = 1.0
 @onready var aim_area: Area3D = $LampAnchor/AimArea
 @onready var cylinder_shape: CylinderShape3D = $LampAnchor/AimArea/CylinderShape.shape
 @onready var raycast: RayCast3D = $FPSAnchor/RayCast3D
-@onready var interaction_label: Label = $Hud/BaseHUD/InteractLabel
+@onready var hud: HUD = $Hud
 
 
 func _ready() -> void:
@@ -169,28 +173,32 @@ func collect_item(body: Node3D):
 func on_ennemy_killed():
 	kill_score += 1
 	print("kill score : ", kill_score)
-	
-	
+
+
 func _handle_interaction():
 	if not raycast.is_colliding():
-		_hide_interaction_text()
+		_clear_hover()
 		return
-	
 	var collider = raycast.get_collider()
-	
-	if collider and collider.is_in_group("interactable"):
-		_show_interaction_text("Press [F] to interact (or X on Xbox, or SQUARE on PS)")
-
-		if Input.is_action_just_pressed("interact"):
-			if collider.has_method("interact"):
-				collider.interact(self)
-	else:
-		_hide_interaction_text()
+	if collider is Interactable and collider.enable:
+		if current_hovered != collider:
+			_clear_hover()
+			current_hovered = collider
+			current_hovered.on_hover_enter()
+			hud.show_help_text(current_hovered.INTERACTION_TEXT)
 		
+		# ✅ ALWAYS call handle_input while hovering
+		current_hovered.handle_input(
+			self,
+			Input.is_action_pressed("interact"),
+			get_physics_process_delta_time()
+		)
+	else:
+		_clear_hover()
 
-func _show_interaction_text(text: String):
-	interaction_label.text = text
-	interaction_label.visible = true
-
-func _hide_interaction_text():
-	interaction_label.visible = false
+func _clear_hover():
+	if current_hovered:
+		current_hovered.is_being_pressed = false
+		current_hovered.on_hover_exit()
+		current_hovered = null
+	hud.hide_help_text()

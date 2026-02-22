@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b6uphe0e54xxk" path="res://characters/player/player.gd" id="1_508ok"]
 [ext_resource type="CylinderMesh" uid="uid://don12f7grk5tq" path="res://models/spotlight_mesh.tres" id="2_5dc8e"]
 [ext_resource type="PackedScene" uid="uid://ig34dw7euucc" path="res://models/props/lamp.tscn" id="2_exd8k"]
-[ext_resource type="PackedScene" uid="uid://donx8metrmqdc" path="res://ui/pause_menu.tscn" id="2_xxgcw"]
+[ext_resource type="PackedScene" uid="uid://c1bfprpwewvo2" path="res://ui/hud.tscn" id="4_5dc8e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b886q"]
 
@@ -23,7 +23,7 @@ transparency = 1
 
 [node name="Player" type="CharacterBody3D" unique_id=1134144444]
 collision_layer = 4
-collision_mask = 5
+collision_mask = 13
 script = ExtResource("1_508ok")
 
 [node name="BodyCollisionShape" type="CollisionShape3D" parent="." unique_id=2122099971]
@@ -84,16 +84,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.86653614, 3.4722185)
 
 [node name="RayCast3D" type="RayCast3D" parent="FPSAnchor" unique_id=1194322530]
 target_position = Vector3(0, 0, -3)
-
-[node name="HUD" type="Control" parent="." unique_id=1314687766]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="PauseMenu" parent="HUD" unique_id=1942109131 instance=ExtResource("2_xxgcw")]
-layout_mode = 1
+collision_mask = 9
 
 [node name="CollectibleRange" type="Area3D" parent="." unique_id=1269460920]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -103,3 +94,5 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollectibleRange" unique_id=559345352]
 transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, 0)
 shape = SubResource("SphereShape3D_exd8k")
+
+[node name="Hud" parent="." unique_id=2086982386 instance=ExtResource("4_5dc8e")]

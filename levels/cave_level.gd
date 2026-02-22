@@ -1,16 +1,20 @@
 extends Node3D
 
-@export var total_enemies: int = 5
+
+var CAVE_LEVEL = 0
+
+var total_enemies
 var enemies_killed: int = 0
 
+var spawning = false
+
+#Later, repalce that with a log calculation in calc_total_enemies().
+const ENEMIES_BY_LEVELS = [20, 40, 80]
+
 func _ready():
-	# Spawn or reference all Boulars
-	var ennemies = get_tree().get_nodes_in_group("ennemy")
-	total_enemies = ennemies.size()
-	
-	# Connect each Boular's killed signal
-	for ennemy in ennemies:
-		ennemy.killed.connect(_on_enemy_killed)
+	calc_total_enemies()
+	#When spawning an ennemy, do not forget to add it the _on-enemy_killed signal.
+	#ennemy.killed.connect(_on_enemy_killed)
 	
 	print("Level started with %d enemies" % total_enemies)
 
@@ -27,3 +31,7 @@ func _complete_level():
 	# 1. Notify GameManager
 	# 2. Spawn the trampoline / portal
 	# 3. Play animation or sound
+
+
+func calc_total_enemies():
+	total_enemies = ENEMIES_BY_LEVELS[clamp(CAVE_LEVEL,1,3)-1]

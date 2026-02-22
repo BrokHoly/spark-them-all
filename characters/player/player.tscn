@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6uphe0e54xxk" path="res://characters/player/player.gd" id="1_508ok"]
 [ext_resource type="CylinderMesh" uid="uid://don12f7grk5tq" path="res://models/spotlight_mesh.tres" id="2_5dc8e"]
-[ext_resource type="PackedScene" uid="uid://ig34dw7euucc" path="res://levels/props/lamp.tscn" id="2_exd8k"]
+[ext_resource type="PackedScene" uid="uid://ig34dw7euucc" path="res://models/props/lamp.tscn" id="2_exd8k"]
 [ext_resource type="PackedScene" uid="uid://donx8metrmqdc" path="res://ui/pause_menu.tscn" id="2_xxgcw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b886q"]

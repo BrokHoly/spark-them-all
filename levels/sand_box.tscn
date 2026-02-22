@@ -43,7 +43,6 @@ visible = false
 
 [node name="Boular" parent="." unique_id=1503704684 node_paths=PackedStringArray("player") instance=ExtResource("5_aymlm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13138151, -7.0094976)
-visible = false
 player = NodePath("../Player")
 
 [node name="Button" parent="." unique_id=1765601522 instance=ExtResource("6_bwjjf")]

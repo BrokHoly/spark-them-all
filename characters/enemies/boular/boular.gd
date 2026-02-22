@@ -21,15 +21,21 @@ func _physics_process(delta: float) -> void:
 	
 	if player:
 		var to_player = (player.global_position - global_position)
-		to_player.y = 0  # Ignore vertical differences for flat movement
+		to_player.y = 0  # Ignore vertical differences
 		if to_player.length() > 0.1:
 			var direction = to_player.normalized()
+			
+			# Movement
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
+			
+			# Smooth rotation toward player
+			var target_rotation = Vector3(0, atan2(-direction.x, -direction.z), 0)
+			rotation.y = lerp_angle(rotation.y, target_rotation.y, 5.0 * delta)
 		else:
+			# Slow down if close
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
-
 	move_and_slide()
 	
 func expose_to_light(delta: float, damage_per_tick: int, damage_cooldown: float):

@@ -1,4 +1,8 @@
 extends CharacterBody3D
+class_name Player
+
+signal grape_collected(new_count: int)
+signal enemy_killed(new_count: int)
 
 # Relative to player control
 const SPEED = 5.0
@@ -165,12 +169,12 @@ func _on_collectible_entered(body: Node3D):
 	
 func collect_item(body: Node3D):
 	boular_grapes += 1
-	print("COLLECT ALLÉ : ", boular_grapes)
+	emit_signal("grape_collected", boular_grapes)  # <- signal emitted
 	body.queue_free()
 
 func on_ennemy_killed():
 	kill_score += 1
-	print("kill score : ", kill_score)
+	emit_signal("enemy_killed",kill_score)
 
 
 func _handle_interaction():
@@ -185,7 +189,6 @@ func _handle_interaction():
 			current_hovered.on_hover_enter()
 			hud.show_help_text(current_hovered.INTERACTION_TEXT)
 		
-		# ✅ ALWAYS call handle_input while hovering
 		current_hovered.handle_input(
 			self,
 			Input.is_action_pressed("interact"),

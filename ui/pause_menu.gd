@@ -12,6 +12,7 @@ func _on_resume_button_pressed() -> void:
 	resume_pressed.emit()
 
 func _on_settings_button_pressed() -> void:
+	settings_pressed.emit()
 	pass # Replace with function body.
 
 func _on_quit_button_pressed() -> void:

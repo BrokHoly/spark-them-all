@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://btxhphovqdvtt"]
 
-[ext_resource type="Shader" uid="uid://dgshhjest7bm6" path="res://collectibles/loots/boular_grape.gdshader" id="2_1lxjm"]
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_xqjb4"]
 radius = 0.2
 
@@ -9,10 +7,14 @@ radius = 0.2
 radius = 0.2
 height = 0.4
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rjpse"]
-render_priority = 0
-shader = ExtResource("2_1lxjm")
-shader_parameter/albedo = Color(1, 0.5, 0.3, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xqjb4"]
+transparency = 1
+albedo_color = Color(0.62352943, 0.08235294, 1, 1)
+metallic = 0.63
+roughness = 0.11
+emission_enabled = true
+emission = Color(0.36862746, 0, 0.95686275, 1)
+emission_energy_multiplier = 0.47
 
 [node name="BoularGrape" type="RigidBody3D" unique_id=1156317511 groups=["collectible"]]
 collision_layer = 2
@@ -21,6 +23,6 @@ mass = 0.428
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1420400019]
 shape = SubResource("SphereShape3D_xqjb4")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=510632318]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=510632318]
 mesh = SubResource("SphereMesh_kvv3t")
-surface_material_override/0 = SubResource("ShaderMaterial_rjpse")
+surface_material_override/0 = SubResource("StandardMaterial3D_xqjb4")

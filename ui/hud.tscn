@@ -66,7 +66,6 @@ texture = ExtResource("3_en2x2")
 
 [node name="Text" type="Label" parent="BaseHUD/Metrics/TopLeft/GrapeScore" unique_id=2084507890]
 layout_mode = 2
-text = "3"
 
 [node name="EnemyRemaining" type="HBoxContainer" parent="BaseHUD/Metrics/TopLeft" unique_id=364229982]
 layout_mode = 2
@@ -77,7 +76,6 @@ texture = ExtResource("4_1v5rv")
 
 [node name="Text" type="Label" parent="BaseHUD/Metrics/TopLeft/EnemyRemaining" unique_id=1639823905]
 layout_mode = 2
-text = "1/20"
 
 [node name="TopRight" type="VBoxContainer" parent="BaseHUD/Metrics" unique_id=648388110]
 layout_mode = 1
@@ -98,14 +96,10 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="PauseMenu" parent="OverlayLayer" unique_id=1942109131 instance=ExtResource("1_rbyyf")]
+process_mode = 3
 visible = false
 layout_mode = 1
-offset_left = 0.0
-offset_right = 0.0
 
 [node name="StatMenu" parent="OverlayLayer" unique_id=1465823771 instance=ExtResource("6_1v5rv")]
 visible = false
 layout_mode = 0
-
-[connection signal="quit_pressed" from="OverlayLayer/PauseMenu" to="." method="_on_pause_menu_quit_pressed"]
-[connection signal="resume_pressed" from="OverlayLayer/PauseMenu" to="." method="_on_pause_menu_resume_pressed"]

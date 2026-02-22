@@ -39,7 +39,6 @@ transform = Transform3D(0.9766723, -0.18596625, 0.10736766, 0, 0.49999997, 0.866
 
 [node name="BoularGrape" parent="." unique_id=1156317511 instance=ExtResource("4_bheoy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2272719, 0.49678457, -2.3667464)
-visible = false
 
 [node name="Boular" parent="." unique_id=1503704684 node_paths=PackedStringArray("player") instance=ExtResource("5_aymlm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13138151, -7.0094976)

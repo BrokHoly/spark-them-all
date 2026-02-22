@@ -96,7 +96,8 @@ collision_mask = 2
 transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, 0)
 shape = SubResource("SphereShape3D_exd8k")
 
-[node name="Hud" parent="." unique_id=2086982386 instance=ExtResource("4_5dc8e")]
+[node name="Hud" parent="." unique_id=2086982386 node_paths=PackedStringArray("player") instance=ExtResource("4_5dc8e")]
+player = NodePath("..")
 
 [node name="DevControls" parent="." unique_id=1168557151 instance=ExtResource("5_ixbpm")]
 

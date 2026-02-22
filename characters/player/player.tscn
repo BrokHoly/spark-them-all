@@ -101,4 +101,10 @@ player = NodePath("..")
 
 [node name="DevControls" parent="." unique_id=1168557151 instance=ExtResource("5_ixbpm")]
 
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1370380067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+light_color = Color(0.5251013, 0.5251013, 0.5251013, 1)
+omni_range = 3.0
+omni_attenuation = 0.5
+
 [connection signal="dev_quit" from="Hud" to="DevControls" method="_on_hud_dev_quit"]

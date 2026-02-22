@@ -5,6 +5,9 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pxy76"]
 albedo_texture = ExtResource("1_2pe26")
+emission_enabled = true
+emission = Color(0.6039216, 0, 0, 1)
+emission_energy_multiplier = 0.1
 
 [sub_resource type="SphereMesh" id="SphereMesh_fwgws"]
 
@@ -12,6 +15,11 @@ albedo_texture = ExtResource("1_2pe26")
 top_radius = 0.1
 bottom_radius = 0.15
 height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwgws"]
+albedo_color = Color(1, 0.5372549, 1, 1)
+emission_enabled = true
+emission = Color(0.6117647, 0, 1, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_2pe26"]
 radius = 0.2
@@ -50,10 +58,12 @@ mesh = SubResource("CylinderMesh_2pe26")
 
 [node name="EyeL" type="MeshInstance3D" parent="BodyMesh" unique_id=352968458]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19907331, 0.95804226, -0.19861281)
+material_override = SubResource("StandardMaterial3D_fwgws")
 mesh = SubResource("SphereMesh_2pe26")
 
 [node name="EyeR" type="MeshInstance3D" parent="BodyMesh" unique_id=1814278732]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199, 0.958, -0.199)
+material_override = SubResource("StandardMaterial3D_fwgws")
 mesh = SubResource("SphereMesh_2pe26")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=25391629]

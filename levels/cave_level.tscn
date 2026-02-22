@@ -1,11 +1,48 @@
 [gd_scene format=3 uid="uid://hfd1iac048ca"]
 
-[ext_resource type="Script" path="res://levels/cave_level.gd" id="1_24gdw"]
+[ext_resource type="Script" uid="uid://couqw1sdcn8r5" path="res://levels/cave_level.gd" id="1_24gdw"]
+[ext_resource type="Script" uid="uid://cq2whxd1plk5e" path="res://levels/terrain.gd" id="2_uydmx"]
+[ext_resource type="PackedScene" uid="uid://crhr55ln80al5" path="res://characters/player/player.tscn" id="3_pxfda"]
+[ext_resource type="PackedScene" uid="uid://bx4penw8dnaux" path="res://characters/enemies/boular/boular.tscn" id="4_llkrk"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_24gdw"]
+agent_height = 1.0
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_24gdw"]
+
+[sub_resource type="Environment" id="Environment_pxfda"]
+ambient_light_source = 2
+ambient_light_color = Color(0.078431375, 0, 0.47058824, 1)
+ambient_light_energy = 0.1
+fog_enabled = true
+volumetric_fog_length = 190.68
+volumetric_fog_detail_spread = 6.0
 
 [node name="CaveLevel" type="Node3D" unique_id=1577445724]
 script = ExtResource("1_24gdw")
 
+[node name="Player" parent="." unique_id=1134144444 instance=ExtResource("3_pxfda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=497483500]
 navigation_mesh = SubResource("NavigationMesh_24gdw")
+
+[node name="Terrain" type="Node3D" parent="." unique_id=480917273]
+script = ExtResource("2_uydmx")
+
+[node name="MeshInstance3DMirorred" type="MeshInstance3D" parent="Terrain" unique_id=1782270777]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain" unique_id=175348464]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain" unique_id=1416959252]
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/StaticBody3D" unique_id=1623253011]
+shape = SubResource("HeightMapShape3D_24gdw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1295934623]
+environment = SubResource("Environment_pxfda")
+
+[node name="Boular" parent="." unique_id=1503704684 node_paths=PackedStringArray("player") instance=ExtResource("4_llkrk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57382584, -10.029104)
+player = NodePath("../Player")

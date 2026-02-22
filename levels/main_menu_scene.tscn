@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://7oqiab58015b"]
+
+[ext_resource type="PackedScene" uid="uid://bnr58pr5vqn6h" path="res://characters/enemies/boular/dumb_boular.tscn" id="1_r3or3"]
+[ext_resource type="PackedScene" uid="uid://bwn7ggwuiki1f" path="res://ui/main_menu.tscn" id="2_dngfu"]
+
+[node name="MainMenuScene" type="Node3D" unique_id=1270561098]
+
+[node name="DumbBoular" parent="." unique_id=1503704684 instance=ExtResource("1_r3or3")]
+transform = Transform3D(-0.92010885, 0, 0.3916628, 0, 1, 0, -0.3916628, 0, -0.92010885, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=829158143]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.68999624, 0.6041435, 1.3617798)
+
+[node name="Control" parent="." unique_id=944826071 instance=ExtResource("2_dngfu")]

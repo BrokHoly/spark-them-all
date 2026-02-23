@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bwn7ggwuiki1f"]
+[gd_scene format=3 uid="uid://bjuqt7ksp6sp6"]
+
+[ext_resource type="Script" uid="uid://tbdr7b2a6p2k" path="res://ui/main_menu.gd" id="1_t7e0r"]
 
 [node name="Control" type="Control" unique_id=944826071]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_t7e0r")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1471597921]
 layout_mode = 1
@@ -51,11 +54,16 @@ grow_vertical = 0
 
 [node name="Author0" type="Label" parent="VBoxContainer2" unique_id=1392283173]
 layout_mode = 2
-text = "Abdelali Ichou"
+text = "ICHOU Abdelali"
 
 [node name="Author1" type="Label" parent="VBoxContainer2" unique_id=239457905]
 layout_mode = 2
+text = "BARRY Mamadou"
 
 [node name="Author2" type="Label" parent="VBoxContainer2" unique_id=1160001109]
 layout_mode = 2
-text = "Baptiste Bricard"
+text = "BRICARD Baptiste"
+
+[connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

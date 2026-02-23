@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://ikinvhbuqis7"]
+
+[ext_resource type="PackedScene" path="res://characters/enemies/boular/dumb_boular.tscn" id="1_r3or3"]
+[ext_resource type="PackedScene" uid="uid://bjuqt7ksp6sp6" path="res://ui/main_menu.tscn" id="2_dngfu"]
+
+[sub_resource type="Environment" id="Environment_r3or3"]
+fog_enabled = true
+fog_light_color = Color(0.18273854, 0.23918012, 0.33394557, 1)
+fog_density = 0.0925
+fog_height = 1.2
+fog_height_density = 1.3196
+
+[node name="MainMenuScene" type="Node3D" unique_id=1270561098]
+
+[node name="DumbBoular" parent="." unique_id=1503704684 instance=ExtResource("1_r3or3")]
+transform = Transform3D(-0.92010885, 0, 0.3916628, 0, 1, 0, -0.3916628, 0, -0.92010885, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=829158143]
+transform = Transform3D(1, 0, 0, 0, 0.9771496, 0.2125529, 0, -0.2125529, 0.9771496, -0.5784261, 1.2128338, 1.6946274)
+environment = SubResource("Environment_r3or3")
+fov = 60.0
+
+[node name="MainMenu" parent="." unique_id=944826071 instance=ExtResource("2_dngfu")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=764944753]
+transform = Transform3D(0.56620485, 0.7921314, -0.22790323, 0, 0.27649283, 0.961016, 0.8242645, -0.54413193, 0.15655158, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1939280100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48934507, 0.471097, 0.6533264)
+light_color = Color(0.99999815, 0.9957141, 0.6901708, 1)

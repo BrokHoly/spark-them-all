@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bnr58pr5vqn6h"]
+
+[ext_resource type="Texture2D" uid="uid://bpp7fslmpt2i4" path="res://characters/enemies/boular/base_texture.png" id="2_5frei"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pxy76"]
+albedo_texture = ExtResource("2_5frei")
+emission_enabled = true
+emission = Color(0.6039216, 0, 0, 1)
+emission_energy_multiplier = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_fwgws"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2pe26"]
+top_radius = 0.1
+bottom_radius = 0.15
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwgws"]
+albedo_color = Color(1, 0.5372549, 1, 1)
+emission_enabled = true
+emission = Color(0.6117647, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2pe26"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bw4kp"]
+
+[node name="DumbBoular" type="CharacterBody3D" unique_id=1503704684 groups=["ennemy"]]
+collision_layer = 4
+collision_mask = 5
+axis_lock_linear_y = true
+
+[node name="BodyMesh" type="Node3D" parent="." unique_id=1069880307]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BodyMesh" unique_id=21274881]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+material_override = SubResource("StandardMaterial3D_pxy76")
+mesh = SubResource("SphereMesh_fwgws")
+
+[node name="Leg1" type="MeshInstance3D" parent="BodyMesh" unique_id=1215029190]
+transform = Transform3D(0.51257634, 0.71482337, -0.4757028, 0.040470265, 0.53328943, 0.84496415, 0.8576875, -0.4523606, 0.24442251, -0.42857432, 0.27584004, 0.42098314)
+mesh = SubResource("CylinderMesh_2pe26")
+
+[node name="Leg2" type="MeshInstance3D" parent="BodyMesh" unique_id=83605545]
+transform = Transform3D(0.39944306, -0.7839462, 0.47526172, 0.04006506, 0.53284836, 0.8452617, -0.91588205, -0.31859264, 0.24425139, 0.42, 0.27630138, 0.421)
+mesh = SubResource("CylinderMesh_2pe26")
+
+[node name="Leg3" type="MeshInstance3D" parent="BodyMesh" unique_id=1402957732]
+transform = Transform3D(-0.5289527, 0.72899526, -0.43448237, 0.040065065, 0.53284836, 0.84526175, 0.8477052, 0.42969596, -0.31105873, -0.42857432, 0.27584004, -0.421)
+mesh = SubResource("CylinderMesh_2pe26")
+
+[node name="Leg4" type="MeshInstance3D" parent="BodyMesh" unique_id=1388315053]
+transform = Transform3D(-0.6320158, -0.64170164, 0.43448234, 0.040065058, 0.53284836, 0.8452617, -0.773919, 0.5516265, -0.31105873, 0.42, 0.27630138, -0.421)
+mesh = SubResource("CylinderMesh_2pe26")
+
+[node name="EyeL" type="MeshInstance3D" parent="BodyMesh" unique_id=352968458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.19907331, 0.95804226, -0.19861281)
+material_override = SubResource("StandardMaterial3D_fwgws")
+mesh = SubResource("SphereMesh_2pe26")
+
+[node name="EyeR" type="MeshInstance3D" parent="BodyMesh" unique_id=1814278732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199, 0.958, -0.199)
+material_override = SubResource("StandardMaterial3D_fwgws")
+mesh = SubResource("SphereMesh_2pe26")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=25391629]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0.6, 0)
+shape = SubResource("SphereShape3D_bw4kp")

@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://crhr55ln80al5"]
 
 [ext_resource type="Script" uid="uid://b6uphe0e54xxk" path="res://characters/player/player.gd" id="1_508ok"]
-[ext_resource type="CylinderMesh" uid="uid://don12f7grk5tq" path="res://models/spotlight_mesh.tres" id="2_5dc8e"]
 [ext_resource type="PackedScene" uid="uid://ig34dw7euucc" path="res://models/props/lamp.tscn" id="2_exd8k"]
 [ext_resource type="PackedScene" uid="uid://c1bfprpwewvo2" path="res://ui/hud.tscn" id="4_5dc8e"]
 [ext_resource type="PackedScene" uid="uid://bidyeh2ffpqjh" path="res://docs/dev_controls.tscn" id="5_ixbpm"]
@@ -10,15 +9,7 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_508ok"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5dc8e"]
-points = PackedVector3Array(0, -2.5, -5, -0.9759202, -2.5, -4.904072, -0.4023099, 0.49970627, -2.0213392, 0, 2.5, -0.10082245, 0.40133142, 0.49970627, -2.0213392, 0.97494125, -2.5, -4.904072, -1.9136648, -2.5, -4.6202035, -0.039154053, 2.5, -0.09299135, -0.019577026, 2.5, -0.098864555, 0.01859808, 2.5, -0.098864555, 0.038175583, 2.5, -0.09299135, 1.9126859, -2.5, -4.6202035, -2.7779953, -2.5, -4.158183, -0.055794716, 2.5, -0.08320284, -1.6895068, -0.50019574, -2.5283868, 0.05481577, 2.5, -0.08320284, 1.6885276, -0.50019574, -2.5283868, 2.7770166, -2.5, -4.158183, -3.5356302, -2.5, -3.5356302, -2.1505482, -0.50019574, -2.1505482, -0.07145643, 2.5, -0.07145643, 0.070477486, 2.5, -0.07145643, 2.1495695, -0.50019574, -2.1505482, 3.5346518, -2.5, -3.5356302, -4.158183, -2.5, -2.7779953, -0.08320284, 2.5, -0.055794716, -2.5283868, -0.50019574, -1.6895068, 0.08222389, 2.5, -0.055794716, 2.5274081, -0.50019574, -1.6895068, 4.1572046, -2.5, -2.7779953, -4.6202035, -2.5, -1.9136648, -0.09299135, 2.5, -0.039154053, 0.092012405, 2.5, -0.039154053, 4.6192245, -2.5, -1.9136648, -4.904072, -2.5, -0.9759202, -2.0213392, 0.49970627, -0.4023099, -0.098864555, 2.5, -0.019577026, 0.09788561, 2.5, -0.019577026, 2.02036, 0.49970627, -0.4023099, 4.9030933, -2.5, -0.9759202, -5, -2.5, 0, -0.10082245, 2.5, 0, 0.0998435, 2.5, 0, 5, -2.5, 0, -4.904072, -2.5, 0.97494125, -2.0213392, 0.49970627, 0.40133142, -0.098864555, 2.5, 0.01859808, 0.09788561, 2.5, 0.01859808, 2.02036, 0.49970627, 0.40133142, 4.9030933, -2.5, 0.97494125, -4.6202035, -2.5, 1.9126859, -0.09299135, 2.5, 0.038175583, 0.092012405, 2.5, 0.038175583, 4.6192245, -2.5, 1.9126859, -4.158183, -2.5, 2.7770166, -0.08320284, 2.5, 0.05481577, -2.5283868, -0.50019574, 1.6885276, 0.08222389, 2.5, 0.05481577, 2.5274081, -0.50019574, 1.6885276, 4.1572046, -2.5, 2.7770166, -3.5356302, -2.5, 3.5346518, -2.1505482, -0.50019574, 2.1495695, -0.07145643, 2.5, 0.070477486, 0.070477486, 2.5, 0.070477486, 3.5346518, -2.5, 3.5346518, 2.1495695, -0.50019574, 2.1495695, -2.7779953, -2.5, 4.1572046, -0.055794716, 2.5, 0.08222389, -1.6895068, -0.50019574, 2.5274081, 0.05481577, 2.5, 0.08222389, 1.6885276, -0.50019574, 2.5274081, 2.7770166, -2.5, 4.1572046, -1.9136648, -2.5, 4.6192245, -0.039154053, 2.5, 0.092012405, 0.038175583, 2.5, 0.092012405, 1.9126859, -2.5, 4.6192245, -0.9759202, -2.5, 4.9030933, -0.4023099, 0.49970627, 2.02036, -0.019577026, 2.5, 0.09788561, 0.01859808, 2.5, 0.09788561, 0.40133142, 0.49970627, 2.02036, 0.97494125, -2.5, 4.9030933, 0, -2.5, 5, 0, 2.5, 0.0998435)
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_5dc8e"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5dc8e"]
-transparency = 1
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ixbpm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_exd8k"]
 
@@ -47,26 +38,10 @@ spot_angle_attenuation = 1.2394011e-05
 collision_layer = 0
 collision_mask = 4
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LampAnchor/AimArea" unique_id=32900553]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -3.03)
-visible = false
-mesh = ExtResource("2_5dc8e")
-
-[node name="CustomConeShape" type="CollisionShape3D" parent="LampAnchor/AimArea" unique_id=1201098704]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -3.03)
-visible = false
-shape = SubResource("ConvexPolygonShape3D_5dc8e")
-
 [node name="CylinderShape" type="CollisionShape3D" parent="LampAnchor/AimArea" unique_id=1477205756]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -1.1920929e-07, -1.3904479)
 shape = SubResource("CylinderShape3D_5dc8e")
 debug_color = Color(0.572453, 0.55207324, 0.17323065, 0.41960785)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LampAnchor/AimArea/CylinderShape" unique_id=88374238]
-visible = false
-material_override = SubResource("StandardMaterial3D_5dc8e")
-transparency = 0.75
-mesh = SubResource("CylinderMesh_ixbpm")
 
 [node name="Lamp" parent="LampAnchor" unique_id=930500765 instance=ExtResource("2_exd8k")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.3578018)

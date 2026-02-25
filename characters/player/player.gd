@@ -47,6 +47,7 @@ const LAMP_FOCUS_RADIUS = 1.0
 @onready var raycast: RayCast3D = $FPSAnchor/RayCast3D
 @onready var hud: HUD = $Hud
 
+const STATS: Dictionary = Dictionary();
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

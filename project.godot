@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SparkThemAll"
-run/main_scene="uid://p6q51xwi2agp"
+run/main_scene="uid://bkx628iow4cs5"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

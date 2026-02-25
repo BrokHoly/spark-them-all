@@ -1,6 +1,8 @@
 extends Interactable
 
 @onready var mesh: MeshInstance3D = $CollisionShape3D/MeshInstance3D
+@export var effect: ButtonEffect
+
 var material
 
 func _ready():
@@ -16,6 +18,10 @@ func interact(player):
 		is_pressed = true
 	_update_visual()
 	_trigger_targets()
+	print("Pressed")
+	if effect:
+		print("Yep effect")
+		effect.apply(player)
 
 func _update_visual():
 	if not enable:

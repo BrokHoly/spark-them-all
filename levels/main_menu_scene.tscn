@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ikinvhbuqis7"]
 
-[ext_resource type="PackedScene" path="res://characters/enemies/boular/dumb_boular.tscn" id="1_r3or3"]
+[ext_resource type="PackedScene" uid="uid://bnr58pr5vqn6h" path="res://characters/enemies/boular/dumb_boular.tscn" id="1_r3or3"]
 [ext_resource type="PackedScene" uid="uid://bjuqt7ksp6sp6" path="res://ui/main_menu.tscn" id="2_dngfu"]
 
 [sub_resource type="Environment" id="Environment_r3or3"]

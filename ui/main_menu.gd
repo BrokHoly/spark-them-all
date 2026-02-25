@@ -3,7 +3,7 @@ extends Control
 
 func _on_start_game_button_pressed() -> void:
 	#Go in the proto_hub scene.
-	get_tree().change_scene_to_file("res://levels/proto_hub.tscn")
+	get_tree().change_scene_to_file("res://levels/hub.tscn")
 
 
 func _on_settings_button_pressed() -> void:

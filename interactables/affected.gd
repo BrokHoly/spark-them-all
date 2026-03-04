@@ -1,5 +1,5 @@
 extends Node
 class_name Affected
 
-func affect(state: bool):
+func affect(_state: bool):
 	pass

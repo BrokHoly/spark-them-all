@@ -2,29 +2,35 @@
 
 [ext_resource type="Script" uid="uid://b6uphe0e54xxk" path="res://characters/player/player.gd" id="1_508ok"]
 [ext_resource type="PackedScene" uid="uid://ig34dw7euucc" path="res://models/props/lamp.tscn" id="2_exd8k"]
-[ext_resource type="Script" uid="uid://cvfxidbdnql68" path="res://characters/player/stats.gd" id="2_ixbpm"]
 [ext_resource type="PackedScene" uid="uid://c1bfprpwewvo2" path="res://ui/hud.tscn" id="4_5dc8e"]
 [ext_resource type="PackedScene" uid="uid://bidyeh2ffpqjh" path="res://docs/dev_controls.tscn" id="5_ixbpm"]
-
-[sub_resource type="Resource" id="Resource_ixbpm"]
-script = ExtResource("2_ixbpm")
-metadata/_custom_type_script = "uid://cvfxidbdnql68"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b886q"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_508ok"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_5dc8e"]
-radius = 7.0
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5dc8e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5dc8e"]
+transparency = 1
+blend_mode = 1
+albedo_color = Color(0.99607843, 0.9137255, 0.74509805, 0.22745098)
+emission_enabled = true
+emission = Color(0.99607843, 0.9137255, 0.74509805, 1)
+emission_energy_multiplier = 0.5
+proximity_fade_distance = 5.0
+distance_fade_mode = 3
+distance_fade_min_distance = 3.0
+distance_fade_max_distance = 5.0
+stencil_flags = 2
+stencil_color = Color(0.99607843, 0.9137255, 0.74509805, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_exd8k"]
-radius = 1.1
 
 [node name="Player" type="CharacterBody3D" unique_id=1134144444]
 collision_layer = 4
 collision_mask = 13
 script = ExtResource("1_508ok")
-stats = SubResource("Resource_ixbpm")
 
 [node name="BodyCollisionShape" type="CollisionShape3D" parent="." unique_id=2122099971]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -39,23 +45,30 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1634474, 0)
 [node name="SpotLight3D" type="SpotLight3D" parent="LampAnchor" unique_id=917961053]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5355877)
 light_color = Color(0.84529376, 0.8447014, 7.70092e-07, 1)
-spot_range = 7.0
 spot_attenuation = 0.0
-spot_angle = 40.0
-spot_angle_attenuation = 0.024518173
+spot_angle_attenuation = 1.2394011e-05
 
-[node name="SpotArea" type="Area3D" parent="LampAnchor" unique_id=426969501]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.53)
+[node name="AimArea" type="Area3D" parent="LampAnchor" unique_id=426969501]
 collision_layer = 0
 collision_mask = 4
 
-[node name="SphereShape" type="CollisionShape3D" parent="LampAnchor/SpotArea" unique_id=1477205756]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-shape = SubResource("SphereShape3D_5dc8e")
+[node name="CylinderShape" type="CollisionShape3D" parent="LampAnchor/AimArea" unique_id=1477205756]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -1.1920929e-07, -1.3904479)
+shape = SubResource("CylinderShape3D_5dc8e")
 debug_color = Color(0.572453, 0.55207324, 0.17323065, 0.41960785)
 
 [node name="Lamp" parent="LampAnchor" unique_id=930500765 instance=ExtResource("2_exd8k")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.3578018)
+
+[node name="SpotArea" type="CSGCylinder3D" parent="LampAnchor" unique_id=588134717]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -2.925982)
+use_collision = true
+collision_layer = 16
+collision_mask = 4
+radius = 5.0
+height = 5.0
+cone = true
+material = SubResource("StandardMaterial3D_5dc8e")
 
 [node name="FPSAnchor" type="Node3D" parent="." unique_id=1330128308]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
@@ -79,6 +92,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollectibleRange" unique_id=559345352]
+transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, 0)
 shape = SubResource("SphereShape3D_exd8k")
 
 [node name="Hud" parent="." unique_id=2086982386 node_paths=PackedStringArray("player") instance=ExtResource("4_5dc8e")]

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://couqw1sdcn8r5" path="res://levels/cave_level.gd" id="1_24gdw"]
 [ext_resource type="Script" uid="uid://cq2whxd1plk5e" path="res://levels/terrain.gd" id="2_uydmx"]
-[ext_resource type="PackedScene" uid="uid://crhr55ln80al5" path="res://characters/player/player.tscn" id="3_pxfda"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_24gdw"]
 agent_height = 1.0
@@ -39,6 +38,3 @@ shape = SubResource("HeightMapShape3D_24gdw")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1295934623]
 environment = SubResource("Environment_pxfda")
-
-[node name="Player" parent="." unique_id=1134144444 instance=ExtResource("3_pxfda")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 145, 0)

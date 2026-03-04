@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bryphgw7kceyb" path="res://interactables/buttons_effect/increase_range.gd" id="3_n4a6k"]
 [ext_resource type="Script" uid="uid://bbhgf6hr285ay" path="res://levels/hole_level.gd" id="3_tm4tk"]
 
-[sub_resource type="Resource" id="Resource_g0rof"]
+[sub_resource type="Resource" id="Resource_n4a6k"]
 script = ExtResource("3_n4a6k")
 metadata/_custom_type_script = "uid://bryphgw7kceyb"
 
@@ -49,8 +49,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200.29489, 0)
 
 [node name="Button" parent="Node3D" unique_id=1765601522 instance=ExtResource("2_3l3id")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.11331, 1.7097201, -8.032068)
-effect = SubResource("Resource_g0rof")
 toggle_mode = false
+effect = SubResource("Resource_n4a6k")
 auto_reset_time = 0.3
 
 [node name="Button2" parent="Node3D" unique_id=1871314834 instance=ExtResource("2_3l3id")]

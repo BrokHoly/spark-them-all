@@ -33,11 +33,11 @@ var stats := {
 	
 	# Damage
 	"lamp_idle_damage_cooldown": {
-		"base": 0.5,
+		"base": 1.0,
 		"flat": 0.0,
 		"mult": 1.0
 	},
-	"lamp_idle_damage_per_tick": {
+	"lamp_idle_damage_amount": {
 		"base": 1.0,
 		"flat": 0.0,
 		"mult": 1.0
@@ -47,7 +47,7 @@ var stats := {
 		"flat": 0.0,
 		"mult": 1.0
 	},
-	"lamp_focus_damage_per_tick": {
+	"lamp_focus_damage_amount": {
 		"base": 1.0,
 		"flat": 0.0,
 		"mult": 1.0

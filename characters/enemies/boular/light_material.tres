@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://rr77in8h4vv1"]
+
+[ext_resource type="Shader" uid="uid://bhek6vmdlbj4h" path="res://characters/enemies/boular/damage_hit_shader.tres" id="1_p47ej"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_p47ej")
+shader_parameter/light_color = Color(1, 1, 0.211765, 1)
+shader_parameter/color_amount = 0.0

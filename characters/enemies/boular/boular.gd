@@ -3,11 +3,12 @@ extends CharacterBody3D
 signal killed
 
 const SPEED = 2.5
-var HEALTH = 5
+var HEALTH = 10
 
 var time_since_last_hit = 0.0
 
 var grape_scene : PackedScene = preload("res://collectibles/loots/boular_grape.tscn")
+@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 @export var player: Node3D 
 
@@ -40,11 +41,13 @@ func _physics_process(delta: float) -> void:
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 	move_and_slide()
 	
-func expose_to_light(delta: float, damage_per_tick: int, damage_cooldown: float):
+func expose_to_light(delta: float, damage_per_tick: float, damage_cooldown: float):
 	# Only take damage if cooldown passed
-	if time_since_last_hit >= damage_cooldown:
+	if time_since_last_hit >= damage_cooldown :
+		print(time_since_last_hit, " >= ", damage_cooldown, " : ", (time_since_last_hit >= damage_cooldown))
 		HEALTH -= damage_per_tick
 		time_since_last_hit = 0.0  # reset cooldown
+		damage_animation()
 		if HEALTH <= 0:
 			_drop_grapes()
 			emit_signal("killed")
@@ -73,3 +76,8 @@ func _drop_grapes():
 		grape.apply_impulse(Vector3.ZERO, direction * force_magnitude)
 		
 		grape.angular_velocity = Vector3(randf() - 0.5, randf() - 0.5, randf() - 0.5)
+
+
+func damage_animation() -> void :
+	animation_player.play("damage_hit")
+	pass

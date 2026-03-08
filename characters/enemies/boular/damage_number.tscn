@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cw0xspd67l1gt"]
+
+[ext_resource type="Script" uid="uid://dl8hbsb0qq8g5" path="res://characters/enemies/boular/damage_number.gd" id="1_13ra0"]
+
+[node name="DamageNumber" type="Node3D" unique_id=1335747828]
+script = ExtResource("1_13ra0")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=819603645]
+billboard = 1
+modulate = Color(0.9929498, 0.82808644, 0.392348, 1)
+outline_modulate = Color(0.64734155, 0.2879659, 0.14024585, 1)
+text = "10"
+font_size = 48
+outline_size = 6

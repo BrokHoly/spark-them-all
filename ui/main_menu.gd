@@ -1,9 +1,10 @@
 extends Control
 
+const hub_scene : String =  "uid://bkx628iow4cs5"
 
 func _on_start_game_button_pressed() -> void:
 	#Go in the proto_hub scene.
-	get_tree().change_scene_to_file("res://levels/hub.tscn")
+	SceneLoader.load_scene(hub_scene)
 
 
 func _on_settings_button_pressed() -> void:

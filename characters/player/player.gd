@@ -4,7 +4,7 @@ class_name Player
 signal grape_collected(new_count: int)
 signal enemy_killed(new_count: int)
 
-@export var stats: Stats;
+@export var stats: Stats
 
 # Relative to player control
 const LOOK_SENSITIVITY = 0.002
@@ -35,23 +35,16 @@ var current_hovered: Interactable = null
 
 
 func _ready() -> void:
-	stats = stats.duplicate()
-	health = stats.get_stat("max_health")
+	if stats != null:
+		stats = stats.duplicate()
+		health = stats.get_stat("max_health")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	collectible_area.body_entered.connect(_on_collectible_entered)
 
-	# ✅ Make this Player persistent (only if root doesn't have one)
-	if not get_tree().get_root().has_node("Player"):
-		self.name = "Player"
-		# Remove from current parent if exists
-		if self.get_parent():
-			self.get_parent().remove_child(self)
-		get_tree().get_root().add_child(self)
-	else:
-		# If root already has a Player, queue this instance (duplicate in scene)
-		queue_free()
-
 func _physics_process(delta: float) -> void:
+	if stats == null:
+		print(stats)
+		return
 	# Add gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta

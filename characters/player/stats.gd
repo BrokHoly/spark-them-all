@@ -1,7 +1,7 @@
 extends Resource
 class_name Stats
 
-@export var stats := {
+var stats := {
 	# Movement
 	"speed": {
 		"base": 5.0,

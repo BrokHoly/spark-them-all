@@ -35,9 +35,8 @@ var current_hovered: Interactable = null
 
 
 func _ready() -> void:
-	if stats != null:
-		stats = stats.duplicate()
-		health = stats.get_stat("max_health")
+	
+	health = stats.get_stat("max_health")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	collectible_area.body_entered.connect(_on_collectible_entered)
 

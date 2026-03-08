@@ -40,27 +40,43 @@ func _process(_delta: float) -> void:
 			# Save current player state
 			var player = get_tree().get_first_node_in_group("player")
 			if player:
-				Game.player_stats = player.stats
+				# Duplicate stats so it persists even after player is freed
+				Game.player_stats = player.stats.copy()
+				print(player.stats.get_stat("lamp_idle_range"))
+				print(Game.player_stats.get_stat("lamp_idle_range"))
 				Game.player_health = player.health
 				Game.grapes = player.boular_grapes
 				Game.kills = player.kill_score
+
+			# Load new scene
 			loaded_resource = ResourceLoader.load_threaded_get(scene_path)
-			# Change scene
 			get_tree().change_scene_to_packed(loaded_resource)
 			await get_tree().scene_changed
+
 			# Spawn new player
 			var new_player = Game.player_scene.instantiate()
+
+			# Assign stats (duplicate again to be safe)
 			if Game.player_stats != null:
-				new_player.stats = Game.player_stats
+				new_player.stats = Game.player_stats.copy()
+				print("Dup :")
+				print(new_player.stats.get_stat("lamp_idle_range"))
 			else:
+				print("NOP")
 				new_player.stats = Stats.new()
 
 			new_player.health = Game.player_health
 			new_player.boular_grapes = Game.grapes
 			new_player.kill_score = Game.kills
 
+			# Add player to the new scene
 			get_tree().current_scene.add_child(new_player)
+			new_player.add_to_group("player")  # important for next load
+			new_player.owner = get_tree().current_scene
+
+			# Move player to spawn if exists
 			var spawn = get_tree().current_scene.get_node_or_null("PlayerSpawn")
 			if spawn:
 				new_player.global_transform = spawn.global_transform
+
 			load_finished.emit()

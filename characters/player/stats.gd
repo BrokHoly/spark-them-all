@@ -121,3 +121,12 @@ func add_stat(stat_name: String, base: float = 0.0, flat: float = 0.0, mult: flo
 			"flat": flat,
 			"mult": mult
 		}
+
+
+func copy() -> Stats:
+	var s = Stats.new()
+	for key in stats.keys():
+		s.stats[key].base = stats[key].base
+		s.stats[key].flat = stats[key].flat
+		s.stats[key].mult = stats[key].mult
+	return s

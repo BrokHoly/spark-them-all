@@ -8,6 +8,7 @@ var HEALTH = 10
 var time_since_last_hit = 0.0
 
 var grape_scene : PackedScene = preload("res://collectibles/loots/boular_grape.tscn")
+var damage_number_scene: PackedScene = preload("res://characters/enemies/boular/damage_number.tscn")
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 @export var player: Node3D 
@@ -44,9 +45,9 @@ func _physics_process(delta: float) -> void:
 func expose_to_light(delta: float, damage_per_tick: float, damage_cooldown: float):
 	# Only take damage if cooldown passed
 	if time_since_last_hit >= damage_cooldown :
-		print(time_since_last_hit, " >= ", damage_cooldown, " : ", (time_since_last_hit >= damage_cooldown))
 		HEALTH -= damage_per_tick
 		time_since_last_hit = 0.0  # reset cooldown
+		_show_damage_number(damage_per_tick)
 		damage_animation()
 		if HEALTH <= 0:
 			_drop_grapes()
@@ -80,4 +81,13 @@ func _drop_grapes():
 
 func damage_animation() -> void :
 	animation_player.play("damage_hit")
-	pass
+
+
+func _show_damage_number(amount: float):
+	if not damage_number_scene:
+		return
+	var dmg = damage_number_scene.instantiate()
+	get_tree().current_scene.add_child(dmg)
+	var offset = Vector3(randf_range(-0.3,0.3),0,randf_range(-0.3,0.3))
+	dmg.global_position = global_position + Vector3(0,1,0) + offset
+	dmg.setup(amount)

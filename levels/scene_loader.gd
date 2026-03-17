@@ -42,8 +42,6 @@ func _process(_delta: float) -> void:
 			if player:
 				# Duplicate stats so it persists even after player is freed
 				Game.player_stats = player.stats.copy()
-				print(player.stats.get_stat("lamp_idle_range"))
-				print(Game.player_stats.get_stat("lamp_idle_range"))
 				Game.player_health = player.health
 				Game.grapes = player.boular_grapes
 				Game.kills = player.kill_score
@@ -59,10 +57,7 @@ func _process(_delta: float) -> void:
 			# Assign stats (duplicate again to be safe)
 			if Game.player_stats != null:
 				new_player.stats = Game.player_stats.copy()
-				print("Dup :")
-				print(new_player.stats.get_stat("lamp_idle_range"))
 			else:
-				print("NOP")
 				new_player.stats = Stats.new()
 
 			new_player.health = Game.player_health

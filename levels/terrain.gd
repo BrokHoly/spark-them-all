@@ -5,7 +5,7 @@ extends Node3D
 @onready var collision_shape: CollisionShape3D = $StaticBody3D/CollisionShape3D
 
 const SIZE = 1000
-const RESOLUTION = 100
+const RESOLUTION = 50
 const HEIGHT_SCALE = 5.0
 const FLAT_RADIUS = 50.0        # radius around origin that stays flat
 const CEILING_HEIGHT = 75.0     # vertical offset of the ceiling mesh

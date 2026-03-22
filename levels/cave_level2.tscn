@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://d4cg0cgko5c4f"]
+
+[ext_resource type="Script" uid="uid://couqw1sdcn8r5" path="res://levels/cave_level.gd" id="1_gcps7"]
+[ext_resource type="Shader" uid="uid://c3bymfv81il1w" path="res://levels/cave_level2.gdshader" id="2_8rv63"]
+[ext_resource type="Texture2D" uid="uid://d2mghtvhjrm16" path="res://levels/heightmaps/level1_map.exr" id="3_8rv63"]
+[ext_resource type="Script" uid="uid://jge5mcn8gv5m" path="res://levels/terrain2.gd" id="3_72wha"]
+[ext_resource type="Shader" uid="uid://cwpqolvnpr5qi" path="res://levels/celling_level2.gdshader" id="4_cu324"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_24gdw"]
+geometry_parsed_geometry_type = 0
+geometry_source_geometry_mode = 2
+cell_size = 2.0
+cell_height = 0.01
+agent_height = 1.0
+agent_max_climb = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cd72l"]
+render_priority = 0
+shader = ExtResource("4_cu324")
+shader_parameter/heightmap = ExtResource("3_8rv63")
+shader_parameter/height_ratio = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yq8mi"]
+flip_faces = true
+size = Vector2(500, 500)
+subdivide_width = 250
+subdivide_depth = 250
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cu324"]
+size = Vector2(500, 500)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cu324"]
+render_priority = 0
+shader = ExtResource("2_8rv63")
+shader_parameter/heightmap = ExtResource("3_8rv63")
+shader_parameter/height_ratio = 1.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gcps7"]
+size = Vector2(500, 500)
+subdivide_width = 250
+subdivide_depth = 250
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_gcps7"]
+
+[sub_resource type="Environment" id="Environment_pxfda"]
+ambient_light_source = 2
+ambient_light_color = Color(0.078431375, 0, 0.47058824, 1)
+ambient_light_energy = 0.1
+fog_enabled = true
+fog_light_color = Color(0.5712012, 0.5166202, 0.68869716, 1)
+volumetric_fog_length = 190.68
+volumetric_fog_detail_spread = 6.0
+
+[node name="CaveLevel" type="Node3D" unique_id=1577445724]
+script = ExtResource("1_gcps7")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=497483500]
+navigation_mesh = SubResource("NavigationMesh_24gdw")
+
+[node name="Celling" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=194741733]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 100, 0)
+material_override = SubResource("ShaderMaterial_cd72l")
+mesh = SubResource("PlaneMesh_yq8mi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Celling" unique_id=792046313]
+mesh = SubResource("PlaneMesh_cu324")
+
+[node name="Terrain" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=22437948]
+material_override = SubResource("ShaderMaterial_cu324")
+mesh = SubResource("PlaneMesh_gcps7")
+script = ExtResource("3_72wha")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Terrain" unique_id=1416959252]
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Terrain/StaticBody3D" unique_id=1359377717]
+shape = SubResource("HeightMapShape3D_gcps7")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1295934623]
+environment = SubResource("Environment_pxfda")
+
+[node name="PlayerSpawn" type="Marker3D" parent="." unique_id=367770791]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 0)
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1603976117]
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

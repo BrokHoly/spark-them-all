@@ -5,6 +5,8 @@ const SPAWN_MIN_RADIUS = 10.0
 const SPAWN_MAX_RADIUS = 20.0
 
 var total_enemies: int = 0
+var enemies_alive: int = 0
+var max_enemies_on_terrain : int = 7
 var enemies_killed: int = 0
 var enemies_spawned: int = 0
 
@@ -19,9 +21,6 @@ const ENEMIES_BY_LEVELS = [20, 40, 80]
 
 func _ready():
 	CAVE_LEVEL = Game.cave_level
-	terrain.generate_terrain()
-	await get_tree().process_frame
-	nav_region.bake_navigation_mesh()
 	await get_tree().create_timer(0.2).timeout
 	calc_total_enemies()
 	print("Level started with %d enemies" % total_enemies)
@@ -29,6 +28,8 @@ func _ready():
 
 func _on_enemy_killed():
 	enemies_killed += 1
+	enemies_alive -= 1   # 🔥 important
+	
 	print("Enemy killed: %d/%d" % [enemies_killed, total_enemies])
 	
 	if enemies_killed >= total_enemies:
@@ -36,7 +37,8 @@ func _on_enemy_killed():
 
 func _complete_level():
 	print("LEVEL COMPLETE!")
-	# Spawn the trampoline / portal
+	await get_tree().create_timer(10.0).timeout
+	SceneLoader.load_scene("uid://bkx628iow4cs5")
 
 func calc_total_enemies():
 	total_enemies = ENEMIES_BY_LEVELS[clamp(CAVE_LEVEL,1,3)-1]
@@ -51,6 +53,8 @@ func _get_spawn_position(player: Node3D) -> Vector3:
 func spawn_enemy():
 	if enemies_spawned >= total_enemies:
 		return
+	if enemies_alive >= max_enemies_on_terrain:
+		return
 	var player = get_tree().get_first_node_in_group("player")
 	if player == null:
 		return
@@ -63,6 +67,7 @@ func spawn_enemy():
 	add_child(enemy)
 	enemy.killed.connect(_on_enemy_killed)
 	enemies_spawned += 1
+	enemies_alive += 1
 
 
 func find_valid_spawn(player: Node3D) -> Vector3:

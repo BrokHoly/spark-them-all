@@ -20,9 +20,12 @@ func _ready() -> void:
 	pause_menu.settings_pressed.connect(_on_pause_menu_setting_pressed)
 	pause_menu.quit_pressed.connect(_on_pause_menu_quit_pressed)
 	
-	if player: 
-		player.grape_collected.connect(update_grape_count)
-		player.enemy_killed.connect(update_enemy_count)
+	if player and player.stats:
+		player.stats.connect("stat_changed", Callable(self, "_on_stat_changed"))
+		
+		# Update HUD immediately
+		_on_stat_changed("grapes_collected", player.stats.get_stat("grapes_collected"))
+		_on_stat_changed("enemies_killed", player.stats.get_stat("enemies_killed"))
 	
 
 func toggle_pause():
@@ -61,3 +64,10 @@ func update_grape_count(count: int):
 	
 func update_enemy_count(count: int):
 	$BaseHUD/Metrics/TopLeft/EnemyRemaining/Text.text = str(count)
+
+func _on_stat_changed(stat_name: String, value: float):
+	match stat_name:
+		"grapes_collected":
+			$BaseHUD/Metrics/TopLeft/GrapeScore/Text.text = str(int(value))
+		"enemies_killed":
+			$BaseHUD/Metrics/TopLeft/EnemyRemaining/Text.text = str(int(value))

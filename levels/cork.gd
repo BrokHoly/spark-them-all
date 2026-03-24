@@ -13,5 +13,4 @@ func _process(delta: float):
 		global_transform.origin += direction * speed * delta
 	
 func affect(_state: bool):
-	print("SALUT")
 	isOpen = true

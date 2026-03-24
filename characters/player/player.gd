@@ -19,6 +19,9 @@ var health : float
 
 var boular_grapes = 0
 var kill_score = 0
+var run_grapes = 0
+var run_kills = 0
+var light_on = true
 
 var isFPS: bool = true
 var is_focusing := false
@@ -62,6 +65,7 @@ func _physics_process(delta: float) -> void:
 
 	_handle_lamp_burn(delta)
 	_handle_interaction()
+	_update_lamp_area()
 
 
 func _handle_movement(delta: float) -> void:
@@ -110,6 +114,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		fps_anchor.rotate_x(-event.relative.y * LOOK_SENSITIVITY)
 		fps_anchor.rotation.x = clamp(fps_anchor.rotation.x,-PI/2,PI/2)
 		update_lamp_rotation()
+		
+	# Toggle spotlight
+	if event.is_action_pressed("toggle_light"):
+		light_on = !light_on
+		lamp_spotlight.visible = light_on
+		spot_area.visible = light_on
 
 
 # Gamepad look
@@ -135,24 +145,35 @@ func update_lamp_rotation() -> void:
 
 # Check if body inside cone
 func _is_in_spotlight(body: Node3D) -> bool:
+	if not light_on:
+		return false
 
+	# Position relative
 	var to_body = body.global_position - lamp_spotlight.global_position
 	var distance = to_body.length()
 
-	if distance > lamp_spotlight.spot_range:
+	# Choisir les stats selon le mode
+	var lamp_range = stats.get_stat("lamp_idle_range")
+	var lamp_angle = stats.get_stat("lamp_idle_angle")
+
+	if is_focusing:
+		lamp_range = stats.get_stat("lamp_focus_range")
+		lamp_angle = stats.get_stat("lamp_focus_angle")
+
+	# Vérifier la distance
+	if distance > lamp_range:
 		return false
 
+	# Vérifier l'angle du cône
 	var forward = -lamp_spotlight.global_transform.basis.z
 	var cos_angle = forward.dot(to_body.normalized())
-
-	var limit = cos(deg_to_rad(lamp_spotlight.spot_angle * 0.5))
-
-	return cos_angle > limit
+	var angle_limit = cos(deg_to_rad(lamp_angle * 1.1))
+	
+	return cos_angle > angle_limit
 
 
 # Lamp damage system
 func _handle_lamp_burn(delta: float) -> void:
-
 	var damage := stats.get_stat("lamp_idle_damage_amount")
 	var cooldown := stats.get_stat("lamp_idle_damage_cooldown")
 
@@ -160,11 +181,12 @@ func _handle_lamp_burn(delta: float) -> void:
 		damage = stats.get_stat("lamp_focus_damage_amount")
 		cooldown = stats.get_stat("lamp_focus_damage_cooldown")
 
+	# Parcourir les corps dans la zone de la lampe
 	for body in spot_area.get_overlapping_bodies():
 		if body.is_in_group("ennemy"):
+			# Vérifier s'ils sont dans le cône exact
 			if _is_in_spotlight(body):
 				body.expose_to_light(delta, damage, cooldown)
-
 
 # Collectibles
 func _on_collectible_entered(body: Node3D):
@@ -173,13 +195,15 @@ func _on_collectible_entered(body: Node3D):
 
 
 func collect_item(body: Node3D):
-	boular_grapes += 1
+	stats.add_flat("run_grapes", 1)
+	stats.add_flat("grapes_collected", 1) # total global += 1
 	emit_signal("grape_collected", boular_grapes)
 	body.queue_free()
 
 
 func on_ennemy_killed():
-	kill_score += 1
+	stats.add_flat("run_kills", 1)
+	stats.add_flat("enemies_killed", 1) # total global
 	emit_signal("enemy_killed",kill_score)
 
 
@@ -207,6 +231,17 @@ func _handle_interaction():
 
 	else:
 		_clear_hover()
+
+
+func _update_lamp_area() -> void:
+	var lamp_range = stats.get_stat("lamp_idle_range")
+	if is_focusing:
+		lamp_range = stats.get_stat("lamp_focus_range")
+
+	# Sphere radius = range
+	spot_collide_sphere.shape.radius = lamp_range
+	# On peut aussi ajuster la position ou le shape si nécessaire
+	spot_area.visible = light_on
 
 
 func _clear_hover():

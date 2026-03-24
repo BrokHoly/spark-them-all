@@ -1,6 +1,8 @@
 extends Resource
 class_name Stats
 
+signal stat_changed(stat_name: String, value: float)
+
 var stats := {
 	# Movement
 	"speed": {
@@ -80,6 +82,27 @@ var stats := {
 		"base": 1.1,
 		"flat": 0.0,
 		"mult": 1.0
+	},
+	
+	"grapes_collected": {
+	"base": 0.0,
+	"flat": 0.0,
+	"mult": 1.0
+	},
+	"enemies_killed": {
+		"base": 0.0,
+		"flat": 0.0,
+		"mult": 1.0
+	},
+	"run_grapes": {
+	"base": 0.0,
+	"flat": 0.0,
+	"mult": 1.0
+	},
+	"run_kills": {
+		"base": 0.0,
+		"flat": 0.0,
+		"mult": 1.0
 	}
 }
 
@@ -94,24 +117,29 @@ func get_stat(stat_name: String) -> float:
 func add_flat(stat_name: String, value: float):
 	if stats.has(stat_name):
 		stats[stat_name].flat += value
+		emit_signal("stat_changed", stat_name, get_stat(stat_name))
 
 
 func add_multiplier(stat_name: String, value: float):
 	if stats.has(stat_name):
 		stats[stat_name].mult += value
+		emit_signal("stat_changed", stat_name, get_stat(stat_name))
 
 
 func set_base(stat_name: String, value: float):
 	if stats.has(stat_name):
 		stats[stat_name].base = value
+		emit_signal("stat_changed", stat_name, get_stat(stat_name))
 
 func set_flat(stat_name: String, value: float):
 	if stats.has(stat_name):
 		stats[stat_name].flat = value
+		emit_signal("stat_changed", stat_name, get_stat(stat_name))
 
 func set_mult(stat_name: String, value: float):
 	if stats.has(stat_name):
 		stats[stat_name].mult = value
+		emit_signal("stat_changed", stat_name, get_stat(stat_name))
 
 
 func add_stat(stat_name: String, base: float = 0.0, flat: float = 0.0, mult: float = 1.0):
@@ -121,6 +149,7 @@ func add_stat(stat_name: String, base: float = 0.0, flat: float = 0.0, mult: flo
 			"flat": flat,
 			"mult": mult
 		}
+		emit_signal("stat_changed", stat_name, get_stat(stat_name))
 
 
 func copy() -> Stats:

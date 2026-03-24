@@ -7,7 +7,7 @@ void vertex() {
 	// Called for every vertex the material is visible on.
 	float height = texture(heightmap, UV).r;
 	if(height > 0.89 ){
-		height = 100.0;
+		height = 50.0;
 	}
 	VERTEX.y += height * height_ratio ;
 }

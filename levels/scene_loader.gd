@@ -43,9 +43,6 @@ func _process(_delta: float) -> void:
 				# Duplicate stats so it persists even after player is freed
 				Game.player_stats = player.stats.copy()
 				Game.player_health = player.health
-				Game.grapes = player.boular_grapes
-				Game.kills = player.kill_score
-
 			# Load new scene
 			loaded_resource = ResourceLoader.load_threaded_get(scene_path)
 			get_tree().change_scene_to_packed(loaded_resource)

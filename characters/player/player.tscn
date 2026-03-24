@@ -70,6 +70,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.86653614, 3.4722185)
 
 [node name="RayCast3D" type="RayCast3D" parent="FPSAnchor" unique_id=1194322530]
+visible = false
 target_position = Vector3(0, 0, -3)
 collision_mask = 9
 

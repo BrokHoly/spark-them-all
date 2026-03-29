@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dfj0lbipg3s3y" path="res://ui/skull_icon_32.png" id="4_1v5rv"]
 [ext_resource type="PackedScene" uid="uid://bydmpphs3feae" path="res://ui/stat_menu.tscn" id="6_1v5rv"]
 
-[node name="Hud" type="CanvasLayer" unique_id=1801688554]
+[node name="hud (pornhud haha)" type="CanvasLayer" unique_id=1801688554]
 script = ExtResource("1_546lt")
 
 [node name="BaseHUD" type="Control" parent="." unique_id=1207388609]
@@ -100,6 +100,10 @@ process_mode = 3
 visible = false
 layout_mode = 1
 
+[node name="GAY" type="LimitAngularVelocityModifier3D" parent="OverlayLayer/PauseMenu" unique_id=1590366769]
+
 [node name="StatMenu" parent="OverlayLayer" unique_id=1465823771 instance=ExtResource("6_1v5rv")]
 visible = false
 layout_mode = 0
+
+[node name="HOMOSEXUEL" type="LimitAngularVelocityModifier3D" parent="." unique_id=1117120538]

@@ -8,6 +8,8 @@ var is_stat = false
 @onready var pause_menu = $OverlayLayer/PauseMenu
 @onready var stat_menu = $OverlayLayer/StatMenu
 @onready var help_text = $BaseHUD/HelpText
+@onready var damage_flash: ColorRect = $BaseHUD/ColorRect
+var damage_intensity := 0.0
 
 @export var player: Player
 
@@ -27,6 +29,11 @@ func _ready() -> void:
 		_on_stat_changed("grapes_collected", player.stats.get_stat("grapes_collected"))
 		_on_stat_changed("enemies_killed", player.stats.get_stat("enemies_killed"))
 	
+	
+func _process(delta):
+	if damage_intensity > 0.0:
+		damage_intensity = max(damage_intensity - delta * 2.0, 0.0)
+		damage_flash.material.set("intensity", damage_intensity)
 
 func toggle_pause():
 	var new_state = !get_tree().paused
@@ -71,3 +78,13 @@ func _on_stat_changed(stat_name: String, value: float):
 			$BaseHUD/Metrics/TopLeft/GrapeScore/Text.text = str(int(value))
 		"enemies_killed":
 			$BaseHUD/Metrics/TopLeft/EnemyRemaining/Text.text = str(int(value))
+			
+
+func show_damage():
+	damage_intensity = 0.6
+	damage_flash.material.set("intensity", damage_intensity)
+
+func show_death_screen():
+	$OverlayLayer/DeathMenu.visible = true
+	#get_tree().paused = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

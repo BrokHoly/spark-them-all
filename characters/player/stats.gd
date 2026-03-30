@@ -28,7 +28,7 @@ var stats := {
 	
 	# Health
 	"max_health": {
-		"base": 10.0,
+		"base": 3.0,
 		"flat": 0.0,
 		"mult": 1.0
 	},

@@ -10,6 +10,10 @@
 script = ExtResource("2_ixbpm")
 metadata/_custom_type_script = "uid://cvfxidbdnql68"
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ixbpm"]
+radius = 0.6
+height = 2.2
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b886q"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_508ok"]
@@ -25,6 +29,14 @@ collision_layer = 4
 collision_mask = 13
 script = ExtResource("1_508ok")
 stats = SubResource("Resource_ixbpm")
+
+[node name="HurtArea" type="Area3D" parent="." unique_id=1557969178]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtArea" unique_id=2085101058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_ixbpm")
 
 [node name="BodyCollisionShape" type="CollisionShape3D" parent="." unique_id=2122099971]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

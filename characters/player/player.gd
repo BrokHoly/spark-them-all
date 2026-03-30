@@ -22,9 +22,11 @@ var kill_score = 0
 var run_grapes = 0
 var run_kills = 0
 var light_on = true
+var time_since_last_hurt_hit = 0.0
 
 var isFPS: bool = true
 var is_focusing := false
+var is_dead = false
 
 var current_hovered: Interactable = null
 
@@ -37,7 +39,9 @@ var current_hovered: Interactable = null
 @onready var spot_collide_sphere: CollisionShape3D = $LampAnchor/SpotArea/SphereShape
 @onready var raycast: RayCast3D = $FPSAnchor/RayCast3D
 @onready var hud: HUD = $Hud
+@onready var hurt_area: Area3D = $HurtArea
 
+@onready var glowstick_scene: PackedScene = preload("res://models/props/glow_stick.tscn")
 
 func _ready() -> void:
 	health = stats.get_stat("max_health")
@@ -48,7 +52,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if stats == null:
 		return
-
+	
+	time_since_last_hurt_hit += delta
 	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -56,6 +61,9 @@ func _physics_process(delta: float) -> void:
 	# Jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = stats.get_stat("jump_velocity")
+		
+	if Input.is_action_just_pressed("throw"):
+		throw_glowstick()
 
 	_handle_movement(delta)
 
@@ -66,6 +74,8 @@ func _physics_process(delta: float) -> void:
 	_handle_lamp_burn(delta)
 	_handle_interaction()
 	_update_lamp_area()
+	
+	handle_hurt()
 
 
 func _handle_movement(delta: float) -> void:
@@ -251,3 +261,49 @@ func _clear_hover():
 		current_hovered = null
 
 	hud.hide_help_text()
+
+func handle_hurt():
+	if is_dead:
+		return
+	for body in hurt_area.get_overlapping_bodies():
+		if body.is_in_group("ennemy"):
+			if time_since_last_hurt_hit < 1.0:
+				return
+			else:
+				print("HIT")
+				time_since_last_hurt_hit = 0.0
+				health -= 1.0
+				hud.show_damage()
+				if health <= 0.0:
+					die()
+				return
+
+func die():
+	if is_dead:
+		return
+	is_dead = true
+	print("DEAD")
+	set_physics_process(false)
+	set_process(false)
+	
+	camera.fov = 60.0
+	velocity = Vector3.ZERO
+	Engine.time_scale = 0.3
+
+	hud.show_death_screen()
+
+func throw_glowstick():
+	var glowstick = glowstick_scene.instantiate()
+
+	var origin = camera.global_transform.origin
+	var forward = -camera.global_transform.basis.z
+	
+	glowstick.global_position = origin + forward * 1.5
+	glowstick.rotation = Vector3(
+		randf_range(0, TAU),
+		randf_range(0, TAU),
+		randf_range(0, TAU)
+	)
+	get_tree().current_scene.add_child(glowstick)
+
+	glowstick.throw(forward)

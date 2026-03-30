@@ -5,9 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://donx8metrmqdc" path="res://ui/pause_menu.tscn" id="1_rbyyf"]
 [ext_resource type="Texture2D" uid="uid://batxwjr6nk183" path="res://ui/void_grape_icon_32.png" id="3_en2x2"]
 [ext_resource type="Texture2D" uid="uid://dfj0lbipg3s3y" path="res://ui/skull_icon_32.png" id="4_1v5rv"]
+[ext_resource type="Shader" uid="uid://4ji54mf0iqpc" path="res://ui/hurt_damage.gdshader" id="5_srpbi"]
 [ext_resource type="PackedScene" uid="uid://bydmpphs3feae" path="res://ui/stat_menu.tscn" id="6_1v5rv"]
+[ext_resource type="PackedScene" uid="uid://cvfpkc5v6yayd" path="res://ui/death_menu.tscn" id="7_q43x7"]
 
-[node name="hud (pornhud haha)" type="CanvasLayer" unique_id=1801688554]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_spcu4"]
+shader = ExtResource("5_srpbi")
+shader_parameter/intensity = 0.0
+
+[node name="hud" type="CanvasLayer" unique_id=1801688554]
 script = ExtResource("1_546lt")
 
 [node name="BaseHUD" type="Control" parent="." unique_id=1207388609]
@@ -86,6 +92,15 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
+[node name="ColorRect" type="ColorRect" parent="BaseHUD" unique_id=2081740290]
+material = SubResource("ShaderMaterial_spcu4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="OverlayLayer" type="Control" parent="." unique_id=246150603]
 layout_mode = 3
 anchors_preset = 15
@@ -100,10 +115,11 @@ process_mode = 3
 visible = false
 layout_mode = 1
 
-[node name="GAY" type="LimitAngularVelocityModifier3D" parent="OverlayLayer/PauseMenu" unique_id=1590366769]
-
 [node name="StatMenu" parent="OverlayLayer" unique_id=1465823771 instance=ExtResource("6_1v5rv")]
 visible = false
 layout_mode = 0
 
-[node name="HOMOSEXUEL" type="LimitAngularVelocityModifier3D" parent="." unique_id=1117120538]
+[node name="DeathMenu" parent="OverlayLayer" unique_id=1108103142 instance=ExtResource("7_q43x7")]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=744527574]

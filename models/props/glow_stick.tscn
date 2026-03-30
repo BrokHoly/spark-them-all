@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c5d6hd73eneqm"]
+
+[ext_resource type="Shader" uid="uid://cm4525wxrk7cr" path="res://models/props/glow_stick.tres" id="1_75cr2"]
+[ext_resource type="Script" uid="uid://dqf3vyopnjixy" path="res://models/props/glow_stick.gd" id="1_tcbsl"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tcbsl"]
+radius = 0.05
+height = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tcbsl"]
+render_priority = 0
+shader = ExtResource("1_75cr2")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_75cr2"]
+material = SubResource("ShaderMaterial_tcbsl")
+radius = 0.02
+height = 0.15
+
+[node name="GlowStick" type="RigidBody3D" unique_id=67347654]
+script = ExtResource("1_tcbsl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1641427999]
+shape = SubResource("CapsuleShape3D_tcbsl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1870552786]
+mesh = SubResource("CapsuleMesh_75cr2")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1175494136]
+light_color = Color(0.31770715, 0.9999997, 0.32271785, 1)
+light_volumetric_fog_energy = 0.5

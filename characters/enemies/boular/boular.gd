@@ -11,10 +11,13 @@ var grape_scene : PackedScene = preload("res://collectibles/loots/boular_grape.t
 var damage_number_scene: PackedScene = preload("res://characters/enemies/boular/damage_number.tscn")
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
-
+@onready var audio_player: AudioStreamPlayer3D = $AudioStreamPlayer
+@onready var mesh = $BodyMesh/MeshInstance3D
+ 
 @export var player: Node3D 
 
 func _ready() -> void:
+	mesh.material_overlay = mesh.material_overlay.duplicate()
 	if player and player.has_method("on_ennemy_killed"):
 		killed.connect(player.on_ennemy_killed)
 
@@ -88,6 +91,7 @@ func _drop_grapes():
 
 
 func damage_animation() -> void :
+	audio_player.play()
 	animation_player.play("damage_hit")
 
 

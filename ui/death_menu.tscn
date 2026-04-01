@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://cvfpkc5v6yayd"]
 
+[ext_resource type="Script" uid="uid://6t5pq3ocwxwk" path="res://ui/death_menu.gd" id="1_4eaoi"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_hgyex"]
 font_size = 80
 
 [node name="DeathMenu" type="CanvasLayer" unique_id=1108103142]
+script = ExtResource("1_4eaoi")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1482825654]
 anchors_preset = 15
@@ -38,3 +41,6 @@ text = "Retry"
 [node name="Quit" type="Button" parent="VBoxContainer" unique_id=319736364]
 layout_mode = 2
 text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -17,7 +17,7 @@ var spawning = false
 @onready var boular: PackedScene = preload("res://characters/enemies/boular/boular.tscn")
 
 #Later, repalce that with a log calculation in calc_total_enemies().
-const ENEMIES_BY_LEVELS = [2, 40, 80]
+const ENEMIES_BY_LEVELS = [10, 20, 40]
 
 func _ready():
 	CAVE_LEVEL = Game.cave_level
@@ -37,11 +37,13 @@ func _on_enemy_killed():
 
 func _complete_level():
 	print("LEVEL COMPLETE!")
-	await get_tree().create_timer(10.0).timeout
+	if(Game.cave_level < 2):
+		Game.cave_level += 1
+	await get_tree().create_timer(5.0).timeout
 	SceneLoader.load_scene("uid://bkx628iow4cs5")
 
 func calc_total_enemies():
-	total_enemies = ENEMIES_BY_LEVELS[clamp(CAVE_LEVEL,1,3)-1]
+	total_enemies = ENEMIES_BY_LEVELS[Game.cave_level]
 
 
 func _get_spawn_position(player: Node3D) -> Vector3:

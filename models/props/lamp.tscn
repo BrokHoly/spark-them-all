@@ -1,9 +1,17 @@
 [gd_scene format=3 uid="uid://ig34dw7euucc"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yhqua"]
+albedo_color = Color(0.25490198, 0.47058824, 1, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_c6ejp"]
+material = SubResource("StandardMaterial3D_yhqua")
 size = Vector3(0.45, 0.3, 0.2)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wsplh"]
+albedo_color = Color(1, 1, 0.30980393, 1)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_m2vqq"]
+material = SubResource("StandardMaterial3D_wsplh")
 top_radius = 0.1
 bottom_radius = 0.1
 height = 0.1

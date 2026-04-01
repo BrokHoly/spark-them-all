@@ -17,10 +17,6 @@ const FOCUS_FOV = 70.0
 
 var health : float
 
-var boular_grapes = 0
-var kill_score = 0
-var run_grapes = 0
-var run_kills = 0
 var light_on = true
 var time_since_last_hurt_hit = 0.0
 
@@ -35,11 +31,16 @@ var current_hovered: Interactable = null
 @onready var lamp_anchor: Node3D = $LampAnchor
 @onready var lamp_spotlight: SpotLight3D = $LampAnchor/SpotLight3D
 @onready var collectible_area: Area3D = $CollectibleRange
+@onready var collectible_shape: CollisionShape3D = $CollectibleRange/CollisionShape3D
 @onready var spot_area: Area3D = $LampAnchor/SpotArea
 @onready var spot_collide_sphere: CollisionShape3D = $LampAnchor/SpotArea/SphereShape
 @onready var raycast: RayCast3D = $FPSAnchor/RayCast3D
 @onready var hud: HUD = $Hud
 @onready var hurt_area: Area3D = $HurtArea
+@onready var hit_audio: AudioStreamPlayer = $DamageHit
+@onready var collect_audio: AudioStreamPlayer = $CollectBop
+@onready var success_audio: AudioStreamPlayer = $Success
+@onready var fail_audio: AudioStreamPlayer = $Fail
 
 @onready var glowstick_scene: PackedScene = preload("res://models/props/glow_stick.tscn")
 
@@ -47,6 +48,7 @@ func _ready() -> void:
 	health = stats.get_stat("max_health")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	collectible_area.body_entered.connect(_on_collectible_entered)
+	update_collect_radius()
 
 
 func _physics_process(delta: float) -> void:
@@ -206,15 +208,17 @@ func _on_collectible_entered(body: Node3D):
 
 func collect_item(body: Node3D):
 	stats.add_flat("run_grapes", 1)
-	stats.add_flat("grapes_collected", 1) # total global += 1
-	emit_signal("grape_collected", boular_grapes)
+	stats.add_flat("grapes_collected", 1)
+	emit_signal("grape_collected", stats.get_stat("run_grapes"))
+	collect_audio.play()
 	body.queue_free()
 
 
 func on_ennemy_killed():
 	stats.add_flat("run_kills", 1)
-	stats.add_flat("enemies_killed", 1) # total global
-	emit_signal("enemy_killed",kill_score)
+	stats.add_flat("enemies_killed", 1)
+
+	emit_signal("enemy_killed", stats.get_stat("run_kills"))
 
 
 func _handle_interaction():
@@ -271,6 +275,7 @@ func handle_hurt():
 				return
 			else:
 				print("HIT")
+				hit_audio.play()
 				time_since_last_hurt_hit = 0.0
 				health -= 1.0
 				hud.show_damage()
@@ -307,3 +312,11 @@ func throw_glowstick():
 	get_tree().current_scene.add_child(glowstick)
 
 	glowstick.throw(forward)
+
+
+func update_collect_radius():
+	var radius = stats.get_stat("collectible_range")
+
+	var shape = collectible_shape.shape
+	if shape is SphereShape3D:
+		shape.radius = radius

@@ -17,6 +17,7 @@ radius = 0.02
 height = 0.15
 
 [node name="GlowStick" type="RigidBody3D" unique_id=67347654]
+collision_layer = 0
 script = ExtResource("1_tcbsl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1641427999]

@@ -1,17 +1,17 @@
-[gd_scene format=3 uid="uid://crhr55ln80al5"]
+[gd_scene format=3 uid="uid://bsexmqek1dhba"]
 
-[ext_resource type="Script" uid="uid://b6uphe0e54xxk" path="res://characters/player/player.gd" id="1_508ok"]
-[ext_resource type="PackedScene" uid="uid://ig34dw7euucc" path="res://models/props/lamp.tscn" id="2_exd8k"]
-[ext_resource type="Script" uid="uid://cvfxidbdnql68" path="res://characters/player/stats.gd" id="2_ixbpm"]
-[ext_resource type="PackedScene" uid="uid://c1bfprpwewvo2" path="res://ui/hud.tscn" id="4_5dc8e"]
-[ext_resource type="PackedScene" uid="uid://bidyeh2ffpqjh" path="res://docs/dev_controls.tscn" id="5_ixbpm"]
-[ext_resource type="AudioStream" uid="uid://b8bx7m5w078ky" path="res://models/sounds/fist_hit.mp3" id="6_c6leb"]
-[ext_resource type="AudioStream" uid="uid://cry6en248x73f" path="res://models/sounds/take-item.mp3" id="7_dirf7"]
-[ext_resource type="AudioStream" uid="uid://cn3y4tc3igknh" path="res://models/sounds/upgrade.mp3" id="8_rpf03"]
-[ext_resource type="AudioStream" uid="uid://c0wut71cv12pt" path="res://models/sounds/wrong.mp3" id="9_x5dtk"]
+[ext_resource type="Script" uid="uid://b6uphe0e54xxk" path="res://characters/player/player.gd" id="1_veh5r"]
+[ext_resource type="Script" uid="uid://cvfxidbdnql68" path="res://characters/player/stats.gd" id="2_uj81y"]
+[ext_resource type="PackedScene" uid="uid://ig34dw7euucc" path="res://models/props/lamp.tscn" id="3_me44d"]
+[ext_resource type="PackedScene" uid="uid://c1bfprpwewvo2" path="res://ui/hud.tscn" id="4_t03b8"]
+[ext_resource type="PackedScene" uid="uid://bidyeh2ffpqjh" path="res://docs/dev_controls.tscn" id="5_rihsf"]
+[ext_resource type="AudioStream" uid="uid://b8bx7m5w078ky" path="res://models/sounds/fist_hit.mp3" id="6_sybmc"]
+[ext_resource type="AudioStream" uid="uid://cry6en248x73f" path="res://models/sounds/take-item.mp3" id="7_jea70"]
+[ext_resource type="AudioStream" uid="uid://cn3y4tc3igknh" path="res://models/sounds/upgrade.mp3" id="8_k2pcx"]
+[ext_resource type="AudioStream" uid="uid://c0wut71cv12pt" path="res://models/sounds/wrong.mp3" id="9_kohwl"]
 
 [sub_resource type="Resource" id="Resource_ixbpm"]
-script = ExtResource("2_ixbpm")
+script = ExtResource("2_uj81y")
 metadata/_custom_type_script = "uid://cvfxidbdnql68"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ixbpm"]
@@ -31,7 +31,7 @@ radius = 1.1
 [node name="Player" type="CharacterBody3D" unique_id=1134144444 groups=["player"]]
 collision_layer = 4
 collision_mask = 13
-script = ExtResource("1_508ok")
+script = ExtResource("1_veh5r")
 stats = SubResource("Resource_ixbpm")
 
 [node name="HurtArea" type="Area3D" parent="." unique_id=1557969178]
@@ -70,7 +70,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 shape = SubResource("SphereShape3D_5dc8e")
 debug_color = Color(0.572453, 0.55207324, 0.17323065, 0.41960785)
 
-[node name="Lamp" parent="LampAnchor" unique_id=930500765 instance=ExtResource("2_exd8k")]
+[node name="Lamp" parent="LampAnchor" unique_id=930500765 instance=ExtResource("3_me44d")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.3578018)
 
 [node name="FPSAnchor" type="Node3D" parent="." unique_id=1330128308]
@@ -98,10 +98,10 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CollectibleRange" unique_id=559345352]
 shape = SubResource("SphereShape3D_exd8k")
 
-[node name="Hud" parent="." unique_id=2086982386 node_paths=PackedStringArray("player") instance=ExtResource("4_5dc8e")]
+[node name="Hud" parent="." unique_id=2086982386 node_paths=PackedStringArray("player") instance=ExtResource("4_t03b8")]
 player = NodePath("..")
 
-[node name="DevControls" parent="." unique_id=1168557151 instance=ExtResource("5_ixbpm")]
+[node name="DevControls" parent="." unique_id=1168557151 instance=ExtResource("5_rihsf")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1370380067]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -110,19 +110,19 @@ omni_range = 3.0
 omni_attenuation = 0.5
 
 [node name="DamageHit" type="AudioStreamPlayer" parent="." unique_id=663043275]
-stream = ExtResource("6_c6leb")
+stream = ExtResource("6_sybmc")
 volume_db = -14.0
 
 [node name="CollectBop" type="AudioStreamPlayer" parent="." unique_id=2073028323]
-stream = ExtResource("7_dirf7")
+stream = ExtResource("7_jea70")
 volume_db = -10.0
 
 [node name="Success" type="AudioStreamPlayer" parent="." unique_id=1781774530]
-stream = ExtResource("8_rpf03")
+stream = ExtResource("8_k2pcx")
 volume_db = -10.0
 
 [node name="Fail" type="AudioStreamPlayer" parent="." unique_id=1692911181]
-stream = ExtResource("9_x5dtk")
+stream = ExtResource("9_kohwl")
 volume_db = -10.0
 
 [connection signal="dev_quit" from="Hud" to="DevControls" method="_on_hud_dev_quit"]

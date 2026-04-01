@@ -4,8 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://cfgsvdfjbsxvl" path="res://models/stone2.jpg" id="2_peekt"]
 [ext_resource type="PackedScene" uid="uid://baxchawcmx2an" path="res://interactables/button/button.tscn" id="3_ro0uo"]
 [ext_resource type="Script" uid="uid://bryphgw7kceyb" path="res://interactables/buttons_effect/increase_range.gd" id="4_4k5b7"]
+[ext_resource type="AudioStream" uid="uid://c0wut71cv12pt" path="res://models/sounds/wrong.mp3" id="4_4lsbo"]
+[ext_resource type="Script" uid="uid://c8708uxyagtyv" path="res://interactables/buttons_effect/increase_collect_range.gd" id="4_hc650"]
+[ext_resource type="Script" uid="uid://djbhyaoqufttw" path="res://interactables/buttons_effect/increase_health.gd" id="5_peekt"]
 [ext_resource type="Script" uid="uid://bbhgf6hr285ay" path="res://levels/hub/hole_level.gd" id="5_teesn"]
 [ext_resource type="Script" uid="uid://c1u00yqsbvle2" path="res://levels/hub/cork.gd" id="6_4lsbo"]
+[ext_resource type="AudioStream" uid="uid://cn3y4tc3igknh" path="res://models/sounds/upgrade.mp3" id="6_ncjev"]
+[ext_resource type="Script" uid="uid://cjd64c681vmrh" path="res://interactables/buttons_effect/increase_damage.gd" id="6_ro0uo"]
 [ext_resource type="Script" uid="uid://cu6x2vvh8wles" path="res://levels/hub/cork_light.gd" id="7_ncjev"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7y6nv"]
@@ -14,9 +19,27 @@ albedo_texture = ExtResource("1_hc650")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3lnaw"]
 albedo_texture = ExtResource("2_peekt")
 
-[sub_resource type="Resource" id="Resource_n4a6k"]
+[sub_resource type="Resource" id="Resource_teesn"]
 script = ExtResource("4_4k5b7")
+success_sound = ExtResource("6_ncjev")
+fail_sound = ExtResource("4_4lsbo")
 metadata/_custom_type_script = "uid://bryphgw7kceyb"
+
+[sub_resource type="Resource" id="Resource_hc650"]
+script = ExtResource("4_hc650")
+metadata/_custom_type_script = "uid://c8708uxyagtyv"
+
+[sub_resource type="Resource" id="Resource_ro0uo"]
+script = ExtResource("5_peekt")
+success_sound = ExtResource("6_ncjev")
+fail_sound = ExtResource("4_4lsbo")
+metadata/_custom_type_script = "uid://djbhyaoqufttw"
+
+[sub_resource type="Resource" id="Resource_4k5b7"]
+script = ExtResource("6_ro0uo")
+success_sound = ExtResource("6_ncjev")
+fail_sound = ExtResource("4_4lsbo")
+metadata/_custom_type_script = "uid://cjd64c681vmrh"
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3l3id"]
 sky_top_color = Color(0.15271166, 0.46556365, 0.7251136, 1)
@@ -199,18 +222,83 @@ height = 18.724762
 
 [node name="UpLightRange" parent="Node3D" unique_id=1765601522 instance=ExtResource("3_ro0uo")]
 transform = Transform3D(0.32908097, 0, -0.94430166, 0, 1, 0, 0.94430166, 0, 0.32908097, 7.152329, 1.7097201, -3.2809074)
+idle_color = Color(0.8218819, 0.5593503, 0.089746244, 1)
+focus_color = Color(0.9780248, 0.75008476, 0.52944154, 1)
+press_color = Color(0.40373543, 0.31126407, 0.07410025, 1)
 toggle_mode = false
-effect = SubResource("Resource_n4a6k")
+effect = SubResource("Resource_teesn")
 auto_reset_time = 0.3
 
-[node name="Button5" parent="Node3D" unique_id=1864035099 instance=ExtResource("3_ro0uo")]
+[node name="Description" type="Label3D" parent="Node3D/UpLightRange" unique_id=293367852]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 2
+text = "Light Range : +10%"
+
+[node name="Cost" type="Label3D" parent="Node3D/UpLightRange" unique_id=56850485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
+double_sided = false
+modulate = Color(1, 0.15686275, 1, 1)
+text = "[Cost 10]"
+
+[node name="CollectRange" parent="Node3D" unique_id=1864035099 instance=ExtResource("3_ro0uo")]
 transform = Transform3D(0.5930676, 0, -0.8051527, 0, 1, 0, 0.8051527, 0, 0.5930676, 6.029161, 1.7097201, -5.442266)
+idle_color = Color(0.6743037, 0.13010117, 0.6373713, 1)
+focus_color = Color(0.8443763, 0.2837769, 0.79615605, 1)
+press_color = Color(0.19673216, 0.010184298, 0.18322727, 1)
+toggle_mode = false
+effect = SubResource("Resource_hc650")
+auto_reset_time = 0.3
 
-[node name="Button4" parent="Node3D" unique_id=840715491 instance=ExtResource("3_ro0uo")]
+[node name="Label3D" type="Label3D" parent="Node3D/CollectRange" unique_id=428094416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 2
+text = "Collect Range : +20%"
+
+[node name="Cost" type="Label3D" parent="Node3D/CollectRange" unique_id=1571803961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
+double_sided = false
+modulate = Color(1, 0.15686275, 1, 1)
+text = "[Cost 5]"
+
+[node name="MaxHealth" parent="Node3D" unique_id=840715491 instance=ExtResource("3_ro0uo")]
 transform = Transform3D(0.8828902, 0, -0.46957943, 0, 1, 0, 0.46957943, 0, 0.8828902, 3.583734, 1.7097201, -7.164747)
+idle_color = Color(0.48468417, 0.7229723, 0.22880027, 1)
+focus_color = Color(0.4638275, 0.9254191, 0.39582458, 1)
+press_color = Color(0.19384348, 0.29950154, 0.079654105, 1)
+toggle_mode = false
+effect = SubResource("Resource_ro0uo")
+auto_reset_time = 0.3
 
-[node name="Button3" parent="Node3D" unique_id=151178278 instance=ExtResource("3_ro0uo")]
+[node name="Label3D" type="Label3D" parent="Node3D/MaxHealth" unique_id=1703419743]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 2
+text = "Max Health : +3"
+
+[node name="Cost" type="Label3D" parent="Node3D/MaxHealth" unique_id=1737939154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
+double_sided = false
+modulate = Color(1, 0.15686275, 1, 1)
+text = "[Cost 10]"
+
+[node name="LampDamages" parent="Node3D" unique_id=151178278 instance=ExtResource("3_ro0uo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39224553, 1.7097201, -8.032068)
+idle_color = Color(0.72429174, 0.12201811, 0.33616933, 1)
+focus_color = Color(0.96678466, 0.40116146, 0.54957473, 1)
+press_color = Color(0.41645172, 0.043533787, 0.17997524, 1)
+toggle_mode = false
+effect = SubResource("Resource_4k5b7")
+auto_reset_time = 0.3
+
+[node name="Label3D" type="Label3D" parent="Node3D/LampDamages" unique_id=1162150074]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 2
+text = "Light Damage : +50%"
+
+[node name="Cost" type="Label3D" parent="Node3D/LampDamages" unique_id=436090636]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
+double_sided = false
+modulate = Color(1, 0.15686275, 1, 1)
+text = "[Cost 15]"
 
 [node name="Nextlevel" parent="Node3D" unique_id=1871314834 node_paths=PackedStringArray("targets") instance=ExtResource("3_ro0uo")]
 transform = Transform3D(0.25320083, 0, 0.9674137, 0, 1, 0, -0.9674137, 0, 0.25320083, -7.0249534, 1.7097201, -1.0263158)
@@ -220,6 +308,19 @@ press_color = Color(0.5504627, 0.10441334, 0.16693074, 1)
 off_color = Color(0.4077112, 0.30738357, 0.4208629, 1)
 toggle_mode = false
 targets = [NodePath("../../CSGCylinder3D"), NodePath("../../SpotLight3D")]
+
+[node name="Label3D" type="Label3D" parent="Node3D/Nextlevel" unique_id=744022655]
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 1.8467724, 0)
+billboard = 2
+text = "Level 1 : 10 Boulars
+Level 2 : 20 Boulars
+Level 3 : 40 Boulars"
+
+[node name="Label3D2" type="Label3D" parent="Node3D/Nextlevel" unique_id=757344618]
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 1, 0)
+billboard = 2
+text = "[OPEN THE HOLE]"
+font_size = 54
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=68813686]
 environment = SubResource("Environment_n4a6k")
@@ -262,3 +363,41 @@ script = ExtResource("7_ncjev")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=7753776]
 transform = Transform3D(0.9644403, -0.26012024, -0.046825327, 0.13399887, 0.32852083, 0.93494296, -0.22781451, -0.9079711, 0.35169452, 0, 0, 0)
 shadow_enabled = true
+
+[node name="Label3D" type="Label3D" parent="." unique_id=450079648]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.4228373, 11.546648)
+billboard = 2
+modulate = Color(0.8516663, 0.9293918, 0.9649566, 1)
+outline_modulate = Color(0.5882353, 0, 0.78039217, 1)
+text = "Pause : Echap
+Toggle Light : X 
+(Ça ne sert à rien à part voir les créatures de plus proche)
+Focus Light : Left Click
+Throw Glow sticks : Right Click
+_
+Vous pouvez aussi jouer à la manette.
+Il y a 3 niveau en tout.
+Pour y accéder, il faut tomber dans le trou.
+Une fois tout les ennemies éléminé, 
+vous serez automatiquement téléporté ici.
+_
+
+Bon Jeu ! <3
+Mamadou, Abdelali, Baptiste."
+font_size = 47
+
+[node name="Label3D2" type="Label3D" parent="." unique_id=1039414312]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, -5.239331, 2.4339776, 5.272543)
+billboard = 2
+modulate = Color(0.8516663, 0.9293918, 0.9649566, 1)
+outline_modulate = Color(0.4548102, 0.103578724, 0.12167155, 1)
+text = "Pour la petite histoire : 
+Vos ennemies sont les Boulars, 
+des créature des cavernes en forme de boule.
+Elles sont sensibles à la lumière.
+Ramassez leur butin à leur mort pour améliorer vos compétences.
+_
+Faites les tous BRILLER
+SPARK THEM ALL!!
+"
+font_size = 47

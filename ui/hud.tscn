@@ -5,13 +5,62 @@
 [ext_resource type="PackedScene" uid="uid://donx8metrmqdc" path="res://ui/pause_menu.tscn" id="1_rbyyf"]
 [ext_resource type="Texture2D" uid="uid://batxwjr6nk183" path="res://ui/void_grape_icon_32.png" id="3_en2x2"]
 [ext_resource type="Texture2D" uid="uid://dfj0lbipg3s3y" path="res://ui/skull_icon_32.png" id="4_1v5rv"]
-[ext_resource type="Shader" uid="uid://4ji54mf0iqpc" path="res://ui/hurt_damage.gdshader" id="5_srpbi"]
+[ext_resource type="Shader" uid="uid://dfle40bj1c8ps" path="res://ui/hurt_damage_visual.tres" id="5_srpbi"]
 [ext_resource type="PackedScene" uid="uid://bydmpphs3feae" path="res://ui/stat_menu.tscn" id="6_1v5rv"]
 [ext_resource type="PackedScene" uid="uid://cvfpkc5v6yayd" path="res://ui/death_menu.tscn" id="7_q43x7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_spcu4"]
 shader = ExtResource("5_srpbi")
 shader_parameter/intensity = 0.0
+
+[sub_resource type="Animation" id="Animation_spcu4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseHUD/DamageRect:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_spcu4")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BaseHUD/DamageRect:material:shader_parameter/intensity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_srpbi"]
+resource_name = "damage_hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseHUD/DamageRect:material:shader_parameter/intensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.20000005),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.30000001192093, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_spcu4"]
+_data = {
+&"RESET": SubResource("Animation_spcu4"),
+&"damage_hit": SubResource("Animation_srpbi")
+}
 
 [node name="hud" type="CanvasLayer" unique_id=1801688554]
 script = ExtResource("1_546lt")
@@ -92,7 +141,7 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="ColorRect" type="ColorRect" parent="BaseHUD" unique_id=2081740290]
+[node name="DamageRect" type="ColorRect" parent="BaseHUD" unique_id=2081740290]
 material = SubResource("ShaderMaterial_spcu4")
 layout_mode = 1
 anchors_preset = 15
@@ -117,9 +166,11 @@ layout_mode = 1
 
 [node name="StatMenu" parent="OverlayLayer" unique_id=1465823771 instance=ExtResource("6_1v5rv")]
 visible = false
-layout_mode = 0
+layout_mode = 1
+mouse_filter = 2
 
 [node name="DeathMenu" parent="OverlayLayer" unique_id=1108103142 instance=ExtResource("7_q43x7")]
 visible = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=744527574]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1566207535]
+libraries/ = SubResource("AnimationLibrary_spcu4")

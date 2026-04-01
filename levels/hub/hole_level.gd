@@ -18,6 +18,7 @@ func _on_body_entered(body: Node3D) -> void:
 	if loading:
 		return
 	if body is Player:
+		print("Go to level:", Game.cave_level)
 		next_scene_path = levels[Game.cave_level]
 		loading = true
 		SceneLoader.load_scene(next_scene_path)

@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://bnr58pr5vqn6h"]
 
-[ext_resource type="Texture2D" uid="uid://bpp7fslmpt2i4" path="res://characters/enemies/boular/base_texture.png" id="2_5frei"]
+[ext_resource type="Shader" uid="uid://b7r6npuatsp7m" path="res://characters/enemies/boular/boular_body_vertex.gdshader" id="1_vsn2p"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pxy76"]
-albedo_texture = ExtResource("2_5frei")
-emission_enabled = true
-emission = Color(0.6039216, 0, 0, 1)
-emission_energy_multiplier = 0.1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xbht5"]
+render_priority = 0
+shader = ExtResource("1_vsn2p")
+shader_parameter/amplitude = 0.06
+shader_parameter/speed = 1.0
+shader_parameter/frequency = 3.0
+shader_parameter/max_displacement = 0.2
+shader_parameter/color = Vector3(0.1, 0.1, 0.6)
 
 [sub_resource type="SphereMesh" id="SphereMesh_fwgws"]
 
@@ -35,7 +38,7 @@ axis_lock_linear_y = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BodyMesh" unique_id=21274881]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
-material_override = SubResource("StandardMaterial3D_pxy76")
+material_override = SubResource("ShaderMaterial_xbht5")
 mesh = SubResource("SphereMesh_fwgws")
 
 [node name="Leg1" type="MeshInstance3D" parent="BodyMesh" unique_id=1215029190]
